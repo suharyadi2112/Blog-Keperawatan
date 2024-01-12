@@ -7,7 +7,7 @@
   </a>
 </p>
 
-<h1 align="center">Laravel Stisla</h1>
+<h1 align="center">Blog Keperawatan</h1>
 
 <span align="center">
 
