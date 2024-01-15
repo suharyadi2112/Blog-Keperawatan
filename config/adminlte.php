@@ -303,7 +303,7 @@ return [
 
         // Sidebar items:
         [
-            'text' => 'dashboard',
+            'text' => 'Dashboard',
             'url'  => 'home',
             'icon' => 'fas fa-fw fa-home',
         ],
@@ -315,13 +315,7 @@ return [
             'text' => 'Informasi',
             'url'  => 'informasi',
             'icon' => 'fas fa-fw fa-info',
-        ],
-        [
-            'text' => 'tes',
-            'url'  => 'tes',
-            'icon' => 'fas fa-fw fa-home',
-        ],
-        
+        ],        
         [
             'text' => 'Dokumentasi',
             'url'  => 'dokumentasi',
