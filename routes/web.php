@@ -34,6 +34,7 @@ Route::resource('dokumen', DocumentController::class);
 
 Route::get('/informasi', [App\Http\Controllers\InformasiController::class, 'index'])->name('indexinformasi');
 Route::post('/addInformasi', [App\Http\Controllers\InformasiController::class, 'addInformasi'])->name('addInformasi');
+Route::delete('/delInformasi/{id}', [App\Http\Controllers\InformasiController::class, 'deleteInformasi'])->name('deleteInformasi');
 
 
 Route::get('/profile/index', [App\Http\Controllers\UserController::class, 'index'])->name('profile');

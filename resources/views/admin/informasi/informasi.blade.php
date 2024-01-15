@@ -67,9 +67,6 @@
                 <textarea id="summernote" name="isi_informasi">
                     Masukan isi informasi disini
                 </textarea>
-                <div class="card-footer">
-                Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
-                </div>
             </div>
         </div>
         <div class="modal-footer justify-content-between">
@@ -92,7 +89,7 @@
 @section('js')
     <script type="text/javascript">
     $(document).ready(function() { 
-        $('#informasiTable').DataTable({
+        var tableInformasi = $('#informasiTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('indexinformasi') }}",
@@ -113,6 +110,31 @@
             });  
         });
 
+        //delete informasi
+        $(document).on("click", ".delInformasi", function () {
+            var result = confirm("Data informasi akan dihapus ?");
+            if (result) {
+                var idInformasi = $(this).attr('data-id');
+                $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+                $.ajax({
+                    url: '{{ route("deleteInformasi", ":id") }}'.replace(":id", idInformasi),
+                    type: 'DELETE',
+                    success: function(data) {
+                        alert('Data berhasil dihapus')
+                        console.log(data)
+                    },
+                    error: function(data,xhr) {
+                        console.log(data)
+                    },
+                    complete: function() {
+                        tableInformasi.ajax.reload();
+                    }
+                });
+            }
+        });
+
+
+        //store infomasi
         $(document).on('submit', '#addInfomasiForm', function(e) {
             e.preventDefault();
             var route = $('#addInfomasiForm').data('route');
@@ -137,6 +159,7 @@
 		        complete: function() {
                     $('.progressAdd').remove();
 		        	$('.btnSaveInformasi').prop('disabled', false);
+                    tableInformasi.ajax.reload();
 		        },
 		        error: function(data,xhr) {
                     if (data.status && data.status == 400) {
