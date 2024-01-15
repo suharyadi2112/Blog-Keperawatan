@@ -313,6 +313,11 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
+            'text' => 'Dokumentasi',
+            'url'  => 'dokumentasi',
+            'icon' => 'fas fa-camera'
+        ],
+        [
             'text'        => 'users',
             'icon'        => 'fas fa-fw fa-users',
             'submenu'     => [
