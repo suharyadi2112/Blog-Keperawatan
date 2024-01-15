@@ -46,22 +46,26 @@
   <div class="modal fade" id="modal-informasi-add">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
+        <div id="overLayAdd"></div>
         <div class="modal-header">
           <h4 class="modal-title">Tambah Informasi</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        
+        <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}">
         <div class="modal-body">
+            <div id="alertInfo"> </div>
             <div class="form-group">
                 <label for="exampleInputBorderWidth2">Judul Informasi</label>
-                <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
+                <input type="text" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
             </div>
 
             <div class="form-group">
                 <label for="exampleInputBorderWidth2">Isi Informasi</label>
-                <textarea id="summernote">
-                    Place <em>some</em> <u>text</u> <strong>here</strong>
+                <textarea id="summernote" name="isi_informasi">
+                    Masukan isi informasi disini
                 </textarea>
                 <div class="card-footer">
                 Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
@@ -70,8 +74,9 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary btnSaveInformasi">Save changes</button>
         </div>
+        </form>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -98,16 +103,59 @@
             ]
         });
 
-
-        
         $(document).on("click", ".showAddInfo", function () {
             $("#modal-informasi-add").modal("show");
-
+      
             //summernote
             $('#summernote').summernote({
                 tabsize: 2,
                 height: 300
             });  
+        });
+
+        $(document).on('submit', '#addInfomasiForm', function(e) {
+            e.preventDefault();
+            var route = $('#addInfomasiForm').data('route');
+            var form_data = $(this);
+            $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+
+            $.ajax({
+		        type: 'POST',
+		        url: route,
+		        data: form_data.serialize(),
+		        beforeSend: function() {
+                    $('#overLayAdd').append('<div class="overlay progressAdd"><i class="fas fa-2x fa-sync fa-spin"></i></div>')
+		        	$('.btnSaveInformasi').prop('disabled', true);
+                    $('.listError').remove();
+		        },
+		        success: function(data) {
+                    var successMsg = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Alert!</h5>Berhasil menyimpan informasi </div>';
+                    $('#alertInfo').append(successMsg);
+                    
+                    console.log(data)
+			    },
+		        complete: function() {
+                    $('.progressAdd').remove();
+		        	$('.btnSaveInformasi').prop('disabled', false);
+		        },
+		        error: function(data,xhr) {
+                    if (data.status && data.status == 400) {
+                        var errorMessage = '<div class="alert alert-danger alert-dismissible listError" style="padding-bottom: 0px;"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-ban"></i> Alert!</h5>';
+                        if (data.responseJSON.message) {
+                            errorMessage += '<ul>';
+                            Object.keys(data.responseJSON.message).forEach(function (field) {
+                                errorMessage += '<li>' + field + ': ' + data.responseJSON.message[field].join(', ') + '</li>';
+                            });
+                            errorMessage += '</ul>';
+                        }
+                        errorMessage += '</div>';
+                        $('#alertInfo').append(errorMessage);
+                    }
+                    console.log(data.responseJSON)
+                    console.log(data)
+		        },
+		    });
+
         });
 
     });
