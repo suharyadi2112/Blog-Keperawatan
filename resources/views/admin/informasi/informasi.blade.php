@@ -7,10 +7,6 @@
 @stop
 
 @section('content')
-
-<link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-
 <section class="content">
     <div class="container-fluid">
       
@@ -32,7 +28,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
                 </tbody>
               </table>
             </div>
@@ -41,12 +36,8 @@
           <!-- /.card -->
         </div>
       </div>
-      <!-- /.row -->
-      
-      <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
-
 @stop
 
 @section('css')
@@ -54,16 +45,10 @@
 @stop
 
 @section('js')
-
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-
-    <script>
-
-    $(function () {  
+    <script type="text/javascript">
+    $(document).ready(function() { 
     //datatable
-        var table = $('#informasiTable').DataTable({
+        $('#informasiTable').DataTable({
             processing: true,
             serverSide: true,
             columns: [
@@ -74,6 +59,5 @@
             ]
         });
     });
-
     </script>
 @stop
