@@ -308,6 +308,11 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
+            'text' => 'dokumen',
+            'url'  => 'dokumen',
+            'icon' => 'fas fa-fw fa-file',
+        ],
+        [
             'text' => 'tes',
             'url'  => 'tes',
             'icon' => 'fas fa-fw fa-home',
