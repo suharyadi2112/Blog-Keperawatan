@@ -13,14 +13,20 @@ class InformasiController extends Controller
         if ($request->ajax()) {
 
         $data = DB::table('users')
-        ->select('name','email')
+        ->select('id','name','email')
         ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
 
-                $actionBtn = 'tes';
+                $actionBtn = '
+                <a href="/informasi/edit/'.$row->id.'">
+                <button type="button" class="btn btn-sm round btn-outline-info shadow"><i class="fa fa-solid fa-pen"></i></button>
+                </a>
+                <a href="/informasi/del/'.$row->id.'">
+                <button type="button" class="btn btn-sm round btn-outline-danger shadow"><i class="fa fa-solid fa-trash"></i></button>
+                </a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
