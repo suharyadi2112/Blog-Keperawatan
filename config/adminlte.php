@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Laravel Boilerplate',
+    'title' => 'RSUD Raja Ahmad Tabib',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Laravel </b>boilerplate',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>RSUD</b> <small>Raja Ahmad Tabib</small>',
+    'logo_img' => 'vendor/adminlte/dist/img/kepri.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,11 +86,11 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/kepri.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 60,
+            'height' => 60,
         ],
     ],
 
@@ -109,11 +109,11 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/kepri.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 80,
+            'height' => 80,
         ],
     ],
 
@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-light-primary elevation-2',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-primary navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -232,7 +232,7 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'light',
     'right_sidebar_slide' => true,
@@ -259,7 +259,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => true,
+    'profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -294,68 +294,62 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
         [
-            'text' => 'dashboard',
+            'text' => 'Dashboard',
             'url'  => 'home',
             'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'dokumen',
+            'text' => 'Dokumen',
             'url'  => 'dokumen',
             'icon' => 'fas fa-fw fa-file',
         ],[
             'text' => 'Informasi',
             'url'  => 'informasi',
             'icon' => 'fas fa-fw fa-info',
-        ],
-        [
-            'text' => 'tes',
-            'url'  => 'tes',
-            'icon' => 'fas fa-fw fa-home',
-        ],
-        
+        ],        
         [
             'text' => 'Dokumentasi',
             'url'  => 'dokumentasi',
             'icon' => 'fas fa-camera'
         ],
-        [
-            'text'        => 'users',
-            'icon'        => 'fas fa-fw fa-users',
-            'submenu'     => [
-                [
-                    'text' => 'all',
-                    'url'  => 'users',
-                ],
-                [
-                    'text' => 'roles',
-                    'url'  => 'roles',
-                ],
-                [
-                    'text' => 'permissions',
-                    'url'  => 'permissions',
-                ],
-            ],
-        ],
+        // [
+        //     'text'        => 'users',
+        //     'icon'        => 'fas fa-fw fa-users',
+        //     'submenu'     => [
+        //         [
+        //             'text' => 'all',
+        //             'url'  => 'users',
+        //         ],
+        //         [
+        //             'text' => 'roles',
+        //             'url'  => 'roles',
+        //         ],
+        //         [
+        //             'text' => 'permissions',
+        //             'url'  => 'permissions',
+        //         ],
+        //     ],
+        // ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'profile/index',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'settings',
-            'url'  => 'settings',
-            'icon' => 'fas fa-fw fa-cogs',
-        ],
+        // [
+        //     'text' => 'settings',
+        //     'url'  => 'settings',
+        //     'icon' => 'fas fa-fw fa-cogs',
+        // ],
     ],
 
     /*

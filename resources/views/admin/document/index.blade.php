@@ -9,6 +9,13 @@
 
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert m-2 alert-success alert-dismissible fade show" role="alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -16,74 +23,29 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Daftar Dokumen</h3>
-                            <a href="{{ route('dokumen.create') }}" class="btn btn-primary btn-sm float-right">Tambah
-                                Dokumen</a>
+                            <div class="card-tools">
+                                <a href="{{ route('dokumen.create') }}" class="btn btn-block btn-primary">Tambah Data</a>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered">
+
+                            <table class="table table-bordered" id="tableDokumen">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">#</th>
+                                        {{-- <th style="width: 10px">#</th> --}}
                                         <th>Nama Dokumen</th>
+                                        <th>Deskripsi</th>
                                         <th>Tanggal</th>
-                                        <th style="width: 40px"></th>
+                                        <th style="width: 150px"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Update software</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>Clean database</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-warning">70%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3.</td>
-                                        <td>Cron job running</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-primary">30%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4.</td>
-                                        <td>Fix and squish bugs</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-success">90%</span></td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
+
                     </div>
                     <!-- /.card -->
 
@@ -93,5 +55,70 @@
 
             </div>
         </div>
+        <div class="modal fade" id="modalDelete">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hapus Dokumen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin akan menghapus dokumen <strong id="namaDokumen"></strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-danger">Ya Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 @endsection
+
+
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+@stop
+
+@section('js')
+
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            var table = $('#tableDokumen').DataTable({
+                processing: true,
+                serverSide: true,
+                columns: [
+                    // {
+                    //     data: '',
+                    //     name: ''
+                    // },
+                    {
+                        data: 'nama',
+                        name: 'Nama'
+                    },
+                    {
+                        data: 'deskripsi',
+                        name: 'Deskripsi'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    },
+                ]
+            });
+        });
+    </script>
+@stop
