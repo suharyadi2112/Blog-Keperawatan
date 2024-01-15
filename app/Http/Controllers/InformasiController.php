@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 
+use App\Models\Informasi;
+
+
 class InformasiController extends Controller
 {
     public function index(Request $request){
 
         if ($request->ajax()) {
 
-        $data = DB::table('users')
-        ->select('id','name','email')
-        ->get();
+        $data = Informasi::query();
 
         return DataTables::of($data)
             ->addIndexColumn()
