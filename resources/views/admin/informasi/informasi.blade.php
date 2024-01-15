@@ -14,22 +14,25 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Informasi</h3>
+                <h3 class="card-title">Data Informasi</h3>
+                <a href="" title="tambahInformasi"><button type="button" style="float: right;" class="btn btn-primary round btn-sm"><i class="fa fa-solid fa-plus"></i> Tambah</button></a>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive">
-              <table class="table table-hover text-nowrap" id="informasiTable">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+            <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table table-hover text-nowrap" id="informasiTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Judul Informasi</th>
+                            <th>Isi Informasi</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- /.card-body -->
           </div>
