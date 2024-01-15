@@ -18,7 +18,7 @@
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
-@section('auth_header', __('adminlte::adminlte.login_message'))
+@section('auth_header', __('Silahkan Login Terlebih Dahulu'))
 
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
@@ -62,7 +62,7 @@
 
         {{-- Login field --}}
         <div class="row">
-            <div class="col-7">
+            {{-- <div class="col-7">
                 <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -70,9 +70,9 @@
                         {{ __('adminlte::adminlte.remember_me') }}
                     </label>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-5">
+            <div class="col-12">
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
                     {{ __('adminlte::adminlte.sign_in') }}
@@ -83,8 +83,8 @@
     </form>
 @stop
 
-@section('auth_footer')
-    {{-- Password reset link --}}
+{{-- @section('auth_footer')
+    
     @if($password_reset_url)
         <p class="my-0">
             <a href="{{ $password_reset_url }}">
@@ -93,7 +93,7 @@
         </p>
     @endif
 
-    {{-- Register link --}}
+    
     @if($register_url)
         <p class="my-0">
             <a href="{{ $register_url }}">
@@ -101,4 +101,4 @@
             </a>
         </p>
     @endif
-@stop
+@stop --}}

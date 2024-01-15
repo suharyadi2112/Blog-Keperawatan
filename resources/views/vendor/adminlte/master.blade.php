@@ -27,10 +27,13 @@
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-
         
+        <!-- datatables -->
         <link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+        
+        <!-- summernote -->
+        <link rel="stylesheet" href="{{asset('vendor/summernote/summernote-bs4.min.css') }}">
 
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -94,6 +97,9 @@
         <script src="{{asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+   
+        <!-- Summernote -->
+        <script src="{{asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
