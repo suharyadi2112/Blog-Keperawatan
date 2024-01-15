@@ -308,9 +308,24 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
+            'text' => 'dokumen',
+            'url'  => 'dokumen',
+            'icon' => 'fas fa-fw fa-file',
+        ],[
+            'text' => 'Informasi',
+            'url'  => 'informasi',
+            'icon' => 'fas fa-fw fa-info',
+        ],
+        [
             'text' => 'tes',
             'url'  => 'tes',
             'icon' => 'fas fa-fw fa-home',
+        ],
+        
+        [
+            'text' => 'Dokumentasi',
+            'url'  => 'dokumentasi',
+            'icon' => 'fas fa-camera'
         ],
         [
             'text'        => 'users',
@@ -333,7 +348,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'profile',
+            'url'  => 'profile/index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
