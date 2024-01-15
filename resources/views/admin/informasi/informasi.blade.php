@@ -8,6 +8,9 @@
 
 @section('content')
 
+<link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 <section class="content">
     <div class="container-fluid">
       
@@ -15,61 +18,21 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Responsive Hover Table</h3>
-
-              <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <h3 class="card-title">Data Informasi</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-              <table class="table table-hover text-nowrap">
+            <div class="card-body table-responsive">
+              <table class="table table-hover text-nowrap" id="informasiTable">
                 <thead>
                   <tr>
                     <th>ID</th>
                     <th>User</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Reason</th>
+                    <th>Email</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-success">Approved</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>219</td>
-                    <td>Alexander Pierce</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-warning">Pending</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>657</td>
-                    <td>Bob Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-primary">Approved</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>175</td>
-                    <td>Mike Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-danger">Denied</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
+                  
                 </tbody>
               </table>
             </div>
@@ -91,5 +54,26 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+
+    <script>
+
+    $(function () {  
+    //datatable
+        var table = $('#informasiTable').DataTable({
+            processing: true,
+            serverSide: true,
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'action', name: 'action'},
+            ]
+        });
+    });
+
+    </script>
 @stop
