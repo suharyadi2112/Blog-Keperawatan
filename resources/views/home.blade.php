@@ -7,7 +7,60 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Dokumen</span>
+                    <span class="info-box-number">
+                        0
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-info"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Informasi</span>
+                    <span class="info-box-number">0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="clearfix hidden-md-up"></div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-camera"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Dokumentasi</span>
+                    <span class="info-box-number">0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">User</span>
+                    <span class="info-box-number">0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 @stop
 
 @section('css')
@@ -15,5 +68,7 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop
