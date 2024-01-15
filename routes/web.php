@@ -25,3 +25,6 @@ Route::get('/dokumentasi', [App\Http\Controllers\DokumentasiController::class, '
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tes', [App\Http\Controllers\HomeController::class, 'tes'])->name('tes');
+
+
+Route::get('/informasi', [App\Http\Controllers\InformasiController::class, 'index'])->name('indexinformasi');

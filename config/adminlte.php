@@ -308,6 +308,11 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
+            'text' => 'Informasi',
+            'url'  => 'informasi',
+            'icon' => 'fas fa-fw fa-info',
+        ],
+        [
             'text' => 'tes',
             'url'  => 'tes',
             'icon' => 'fas fa-fw fa-home',
