@@ -321,35 +321,35 @@ return [
             'url'  => 'dokumentasi',
             'icon' => 'fas fa-camera'
         ],
-        [
-            'text'        => 'users',
-            'icon'        => 'fas fa-fw fa-users',
-            'submenu'     => [
-                [
-                    'text' => 'all',
-                    'url'  => 'users',
-                ],
-                [
-                    'text' => 'roles',
-                    'url'  => 'roles',
-                ],
-                [
-                    'text' => 'permissions',
-                    'url'  => 'permissions',
-                ],
-            ],
-        ],
+        // [
+        //     'text'        => 'users',
+        //     'icon'        => 'fas fa-fw fa-users',
+        //     'submenu'     => [
+        //         [
+        //             'text' => 'all',
+        //             'url'  => 'users',
+        //         ],
+        //         [
+        //             'text' => 'roles',
+        //             'url'  => 'roles',
+        //         ],
+        //         [
+        //             'text' => 'permissions',
+        //             'url'  => 'permissions',
+        //         ],
+        //     ],
+        // ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'profile/index',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'settings',
-            'url'  => 'settings',
-            'icon' => 'fas fa-fw fa-cogs',
-        ],
+        // [
+        //     'text' => 'settings',
+        //     'url'  => 'settings',
+        //     'icon' => 'fas fa-fw fa-cogs',
+        // ],
     ],
 
     /*
