@@ -312,6 +312,7 @@ return [
             'url'  => 'tes',
             'icon' => 'fas fa-fw fa-home',
         ],
+        
         [
             'text'        => 'users',
             'icon'        => 'fas fa-fw fa-users',
@@ -333,7 +334,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'profile',
+            'url'  => 'profile/index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
