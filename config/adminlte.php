@@ -308,15 +308,13 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
-<<<<<<< HEAD
             'text' => 'dokumen',
             'url'  => 'dokumen',
             'icon' => 'fas fa-fw fa-file',
-=======
+        ],[
             'text' => 'Informasi',
             'url'  => 'informasi',
             'icon' => 'fas fa-fw fa-info',
->>>>>>> 6a311dda0e023e9cd27a04d2ec6fb79b342e9ea4
         ],
         [
             'text' => 'tes',
