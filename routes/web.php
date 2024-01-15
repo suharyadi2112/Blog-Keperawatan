@@ -18,11 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-
+Auth::routes(
+    [
+        'register' => true,
+        'reset' => false,
+        'verify' => false,
+    ]
+);
 
 Route::get('/dokumentasi', [App\Http\Controllers\DokumentasiController::class, 'index'])->name('dokumentasi');
+Route::post('/dokumentasi', [App\Http\Controllers\DokumentasiController::class, 'store'])->name('dokumentasi.store');
+Route::get('/dokumentasi/{id}', [App\Http\Controllers\DokumentasiController::class, 'show'])->name('dokumentasi.show');
+Route::delete('/dokumentasi/{id}', [App\Http\Controllers\DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tes', [App\Http\Controllers\HomeController::class, 'tes'])->name('tes');
