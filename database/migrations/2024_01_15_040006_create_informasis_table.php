@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('informasis', function (Blueprint $table) {
             $table->id();
+            //user
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
             $table->string('judul_informasi');
             $table->text('isi_informasi');

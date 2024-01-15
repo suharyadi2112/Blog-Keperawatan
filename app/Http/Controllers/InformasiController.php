@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Models\Informasi;
 
@@ -43,14 +45,16 @@ class InformasiController extends Controller
     public function addInformasi(Request $request){
         
         try {
+
+            $request->merge(['id_user' => Auth::id()]);
             $validator = $this->validateInformasi($request, 'insert');
 
             if ($validator->fails()) {
                 throw new ValidationException($validator);
             }
-
             DB::transaction(function () use ($request) {
                 Informasi::create([
+                    'id_user' => $request->id_user,
                     'judul_informasi' => $request->input('judul_informasi'),
                     'isi_informasi' => $request->input('isi_informasi'),
                 ]);
@@ -79,6 +83,7 @@ class InformasiController extends Controller
     {
         if($action == 'insert'){
             $validator = Validator::make($request->all(), [
+                'id_user' => 'required|max:12',
                 'judul_informasi' => 'required|string|max:100',
                 'isi_informasi' => 'required|nullable|string|max:5000',
             ]);

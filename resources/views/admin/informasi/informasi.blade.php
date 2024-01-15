@@ -149,9 +149,10 @@
                     $('#overLayAdd').append('<div class="overlay progressAdd"><i class="fas fa-2x fa-sync fa-spin"></i></div>')
 		        	$('.btnSaveInformasi').prop('disabled', true);
                     $('.listError').remove();
+                    $('.listError').remove();
 		        },
 		        success: function(data) {
-                    var successMsg = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Alert!</h5>Berhasil menyimpan informasi </div>';
+                    var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Alert!</h5>Berhasil menyimpan informasi </div>';
                     $('#alertInfo').append(successMsg);
                     
                     console.log(data)
