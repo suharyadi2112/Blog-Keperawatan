@@ -16,7 +16,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Daftar Dokumen</h3>
-                            <a href="{{ route('dokumen.create') }}" class="btn btn-primary btn-sm float-right">Tambah
+                            <a href="{{ route('dokumen.create') }}" class="btn btn-primary btn-sm float-right">
+                                <i class="fas fa-plus"></i>
+                                Tambah
                                 Dokumen</a>
                         </div>
                         <!-- /.card-header -->

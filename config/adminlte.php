@@ -308,7 +308,7 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'dokumen',
+            'text' => 'Dokumen',
             'url'  => 'dokumen',
             'icon' => 'fas fa-fw fa-file',
         ],[
