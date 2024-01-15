@@ -303,7 +303,7 @@ return [
 
         // Sidebar items:
         [
-            'text' => 'dashboard',
+            'text' => 'Dashboard',
             'url'  => 'home',
             'icon' => 'fas fa-fw fa-home',
         ],
@@ -315,12 +315,7 @@ return [
             'text' => 'Informasi',
             'url'  => 'informasi',
             'icon' => 'fas fa-fw fa-info',
-        ],
-        [
-            'text' => 'tes',
-            'url'  => 'tes',
-            'icon' => 'fas fa-fw fa-home',
-        ],
+        ],        
         [
             'text' => 'Dokumentasi',
             'url'  => 'dokumentasi',
@@ -347,7 +342,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'profile',
+            'url'  => 'profile/index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

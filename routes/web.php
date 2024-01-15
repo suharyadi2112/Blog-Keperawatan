@@ -33,3 +33,8 @@ Route::resource('dokumen', DocumentController::class);
 
 
 Route::get('/informasi', [App\Http\Controllers\InformasiController::class, 'index'])->name('indexinformasi');
+
+
+Route::get('/profile/index', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
+Route::get('/profile/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editprofile');
+Route::post('/profile/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateprofile');
