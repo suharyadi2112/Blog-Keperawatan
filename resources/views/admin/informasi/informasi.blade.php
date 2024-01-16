@@ -150,7 +150,7 @@
                 {data: 'isi_informasi', name: 'isi_informasi',
 
                     render: function(type, row, data){
-	            		return '<a href="informasi/'+data.id+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button></a>';
+	            		return '<a href="informasi/'+data.id+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow-sm"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button></a>';
                     }
                 },
                 {data: 'dokumentasis',
@@ -159,7 +159,8 @@
                         if (data.dokumentasis.length > 0) {
                             for (let i = 0; i < data.dokumentasis.length; i++) {
                                 let link = '{{ asset("storage/dokumentasi/") }}' + '/' + data.dokumentasis[i].foto_dokumentasi;
-                                dokumentasiHtml += '<a href="' + link + '" target="_blank">' + data.dokumentasis[i].foto_dokumentasi + '</a><br>';
+                                
+                                dokumentasiHtml += '<a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-info shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+ data.dokumentasis[i].foto_dokumentasi+'</button></a><br>';
                             }
                         } else {
                             dokumentasiHtml = 'No Dokumentasis';
@@ -167,7 +168,22 @@
                         return dokumentasiHtml;
                     }
                 },
-                {data: 'judul_informasi', name: 'judul_informasi'},
+                {data: 'dokumen',
+                    render: function(type, row, data) {
+                        let dokumen = '';
+                        if (data.dokumen.length > 0) {
+                            for (let i = 0; i < data.dokumen.length; i++) {
+                                var parts = data.dokumen[i].file.split('/');//split /dokumen
+                                var namaDokumenFix = parts[1];
+                                let link = '{{ asset("storage/") }}' + '/' + data.dokumen[i].file;
+                                dokumen += '<a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-info shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+namaDokumenFix+'</button></a><br>';
+                            }
+                        } else {
+                            dokumen = 'No Dokumen';
+                        }
+                        return dokumen;
+                    }
+                },
                 {data: 'action', name: 'action'},
             ],
             createdRow:function(row,data,index){
