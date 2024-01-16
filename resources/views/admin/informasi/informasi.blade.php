@@ -80,6 +80,44 @@
     <!-- /.modal-dialog -->
   </div>
 
+  
+  <div class="modal fade" id="modal-informasi-add">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="overLayAdd"></div>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Informasi</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}">
+        <div class="modal-body">
+            <div id="alertInfo"> </div>
+            <div class="form-group">
+                <label for="exampleInputBorderWidth2">Judul Informasi</label>
+                <input type="text" id="judul_informasi" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputBorderWidth2">Isi Informasi</label>
+                <textarea id="summernote" name="isi_informasi" id="isi_informasi">
+                    Masukan isi informasi disini
+                </textarea>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btnSaveInformasi">Save changes</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
 @stop
 
 @section('css')
@@ -95,10 +133,20 @@
             ajax: "{{ route('indexinformasi') }}",
             columns: [
                 {data: 'judul_informasi', name: 'judul_informasi'},
-                {data: 'isi_informasi', name: 'isi_informasi'},
+                {data: 'isi_informasi', name: 'isi_informasi',
+
+                render: function(type, row, data){
+	            		return '<button type="button" class="btn btn-outline-primary btn-sm shadow detailInformasi" data-id="'+data.id+'"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button>';
+                    }
+
+                },
                 {data: 'action', name: 'action'},
-            ]
+            ],
+            createdRow:function(row,data,index){
+		    	$('td',row).eq(2).attr("nowrap","nowrap");
+			}
         });
+        
 
         $(document).on("click", ".showAddInfo", function () {
             $("#modal-informasi-add").modal("show");
@@ -133,6 +181,29 @@
             }
         });
 
+        //detail informasi
+        $(document).on("click", ".detailInformasi", function () {        
+            var idInformasi = $(this).attr('data-id');
+            alert(idInformasi)
+        });
+
+        //update informasi
+        $(document).on("click", ".upInformasi", function () {        
+            var idInformasi = $(this).attr('data-id');
+            $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+            $.ajax({
+                url: '{{ route("informasiByID", ":id") }}'.replace(":id", idInformasi),
+                type: 'GET',
+                success: function(data) {
+                    console.log(data)
+                },
+                error: function(data,xhr) {
+                    console.log(data)
+                },
+                complete: function() {
+                }
+            });
+        });
 
         //store infomasi
         $(document).on('submit', '#addInfomasiForm', function(e) {

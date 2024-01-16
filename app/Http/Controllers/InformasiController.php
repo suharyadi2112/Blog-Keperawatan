@@ -15,6 +15,11 @@ use App\Models\Informasi;
 
 class InformasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request){
 
         if ($request->ajax()) {
@@ -26,8 +31,8 @@ class InformasiController extends Controller
             ->addColumn('action', function($row){
 
                 $actionBtn = '
-                <a href="/informasi/edit/'.$row->id.'">
-                <button type="button" class="btn btn-sm round btn-outline-info shadow"><i class="fa fa-solid fa-pen"></i></button>
+                <a>
+                <button type="button" class="btn btn-sm round btn-outline-info shadow upInformasi" data-id="'.$row->id.'"><i class="fa fa-solid fa-pen"></i></button>
                 </a>
                 <a>
                 <button type="button" class="btn btn-sm round btn-outline-danger shadow delInformasi" data-id='.$row->id.'><i class="fa fa-solid fa-trash"></i></button>
@@ -76,7 +81,15 @@ class InformasiController extends Controller
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
+    }
 
+    public function informasiByID($id){
+        try {
+            $record = Informasi::find($id);
+            return response()->json(['status' => 'success', 'message' => 'Informasi retrieved', 'data' => $record], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
     }
 
     private function validateInformasi(Request $request, $action = 'insert')
@@ -85,7 +98,7 @@ class InformasiController extends Controller
             $validator = Validator::make($request->all(), [
                 'id_user' => 'required|max:12',
                 'judul_informasi' => 'required|string|max:100',
-                'isi_informasi' => 'required|nullable|string|max:5000',
+                'isi_informasi' => 'required|nullable|string|max:10000',
             ]);
         }
         return $validator;
