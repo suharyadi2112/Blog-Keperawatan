@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Informasi</h1>
 @stop
 
 @section('content')
@@ -141,7 +141,7 @@
                 {data: 'isi_informasi', name: 'isi_informasi',
 
                 render: function(type, row, data){
-	            		return '<button type="button" class="btn btn-outline-primary btn-sm shadow detailInformasi" data-id="'+data.id+'"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button>';
+	            		return '<a href="informasi/'+data.id+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button></a>';
                     }
 
                 },
@@ -184,12 +184,6 @@
                     }
                 });
             }
-        });
-
-        //detail informasi
-        $(document).on("click", ".detailInformasi", function () {        
-            var idInformasi = $(this).attr('data-id');
-            alert(idInformasi)
         });
 
         //update informasi
@@ -240,6 +234,7 @@
                     $('.progressAdd').remove();
 		        	$('.btnSaveInformasi').prop('disabled', false);
                     tableInformasi.ajax.reload();
+                    $("#modal-informasi-add").modal("hide");
 		        },
 		        error: function(data,xhr) {
                     if (data.status && data.status == 400) {

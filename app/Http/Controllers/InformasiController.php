@@ -25,7 +25,7 @@ class InformasiController extends Controller
 
         if ($request->ajax()) {
 
-        $data = Informasi::query();
+        $data = Informasi::query()->orderBy('id', 'DESC');
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -109,7 +109,7 @@ class InformasiController extends Controller
     public function informasiByID($id){
         try {
             $record = Informasi::find($id);
-            return response()->json(['status' => 'success', 'message' => 'Informasi retrieved', 'data' => $record], 200);
+            return view('admin.informasi.detail_informasi', ['detailinfo' => $record->isi_informasi, 'judulInfo' => $record->judul_informasi]);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
@@ -122,7 +122,6 @@ class InformasiController extends Controller
                 'id_user' => 'required|max:12',
                 'judul_informasi' => 'required|string|max:100',
                 'isi_informasi' => 'required|nullable|string|max:10000',
-                'file_dokumentasi' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]);
         }
         return $validator;
