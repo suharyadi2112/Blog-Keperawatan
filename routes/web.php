@@ -46,6 +46,10 @@ Route::get('/informasi', [App\Http\Controllers\InformasiController::class, 'inde
 Route::post('/addInformasi', [App\Http\Controllers\InformasiController::class, 'addInformasi'])->name('addInformasi');
 Route::delete('/delInformasi/{id}', [App\Http\Controllers\InformasiController::class, 'deleteInformasi'])->name('deleteInformasi');
 Route::get('/informasi/{id}', [App\Http\Controllers\InformasiController::class, 'informasiByID'])->name('informasiByID');
+Route::get('/informasi/update/{id}', [App\Http\Controllers\InformasiController::class, 'informasiShowUpdate'])->name('informasiShowUpdate');
+Route::post('/informasi/update/proses/{id}', [App\Http\Controllers\InformasiController::class, 'upDateInformasi'])->name('upDateInformasi');
+
+
 
 
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'index'])->name('profile');

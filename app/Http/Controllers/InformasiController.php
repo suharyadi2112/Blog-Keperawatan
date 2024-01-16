@@ -33,8 +33,8 @@ class InformasiController extends Controller
             ->addColumn('action', function($row){
 
                 $actionBtn = '
-                <a>
-                <button type="button" class="btn btn-sm round btn-outline-info shadow upInformasi" data-id="'.$row->id.'"><i class="fa fa-solid fa-pen"></i></button>
+                <a href="'.Route('informasiShowUpdate', ['id' => $row->id]).'">
+                <button type="button" class="btn btn-sm round btn-outline-info shadow"><i class="fa fa-solid fa-pen"></i></button>
                 </a>
                 <a>
                 <button type="button" class="btn btn-sm round btn-outline-danger shadow delInformasi" data-id='.$row->id.'><i class="fa fa-solid fa-trash"></i></button>
@@ -143,6 +143,27 @@ class InformasiController extends Controller
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
+    }
+
+    public function informasiShowUpdate($id){
+        try {
+            $data = Informasi::find($id);
+            // $dataDokumentasi = Dokumentasi::where('id_informasi', $id)->select('foto_dokumentasi')->get();
+            // $dataDokumen = DokumenModel::find($id);
+
+            return view('admin.informasi.edit_informasi', ['informasi' => $data]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
+    }
+
+    public function upDateInformasi(Request $request, $id){
+
+        $informasi = Informasi::find($id);
+        $informasi->update(['judul_informasi' => $request->judul_informasi, 'isi_informasi' => $request->isi_informasi]);
+
+        return response()->json(['status' => 'success', 'message' => 'Informasi updated', 'data' => null], 200);
+
     }
 
     private function validateInformasi(Request $request, $action = 'insert')

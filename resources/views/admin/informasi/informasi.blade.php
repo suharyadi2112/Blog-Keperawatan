@@ -93,43 +93,6 @@
     <!-- /.modal-dialog -->
   </div>
 
-  
-  <div class="modal fade" id="modal-informasi-add">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div id="overLayAdd"></div>
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Informasi</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}">
-        <div class="modal-body">
-            <div id="alertInfo"> </div>
-            <div class="form-group">
-                <label for="exampleInputBorderWidth2">Judul Informasi</label>
-                <input type="text" id="judul_informasi" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputBorderWidth2">Isi Informasi</label>
-                <textarea id="summernote" name="isi_informasi" id="isi_informasi">
-                    Masukan isi informasi disini
-                </textarea>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btnSaveInformasi">Save changes</button>
-        </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
 
 @stop
 
@@ -159,7 +122,7 @@
                         if (data.dokumentasis.length > 0) {
                             for (let i = 0; i < data.dokumentasis.length; i++) {
                                 let link = '{{ asset("storage/dokumentasi/") }}' + '/' + data.dokumentasis[i].foto_dokumentasi;
-                                
+
                                 dokumentasiHtml += '<a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-info shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+ data.dokumentasis[i].foto_dokumentasi+'</button></a><br>';
                             }
                         } else {
@@ -224,24 +187,6 @@
                     }
                 });
             }
-        });
-
-        //update informasi
-        $(document).on("click", ".upInformasi", function () {        
-            var idInformasi = $(this).attr('data-id');
-            $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
-            $.ajax({
-                url: '{{ route("informasiByID", ":id") }}'.replace(":id", idInformasi),
-                type: 'GET',
-                success: function(data) {
-                    console.log(data)
-                },
-                error: function(data,xhr) {
-                    console.log(data)
-                },
-                complete: function() {
-                }
-            });
         });
 
         //store infomasi
