@@ -136,6 +136,7 @@
         var tableInformasi = $('#informasiTable').DataTable({
             processing: true,
             serverSide: true,
+            searching: false,
             ajax: "{{ route('indexinformasi') }}",
             columns: [
                 {data: 'judul_informasi', name: 'judul_informasi'},
