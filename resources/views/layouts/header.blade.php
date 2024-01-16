@@ -19,11 +19,10 @@
                         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
-                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}"
-                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                                    in</a>
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Masuk</a>
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
@@ -42,7 +41,7 @@
     <div class="header-inner">
         <div class="container">
             <div class="inner">
-                <div class="row">
+                <div class="row ">
                     <div class="col-lg-3 col-md-3 col-12">
                         <!-- Start Logo -->
                         <div class="logo">
@@ -58,54 +57,18 @@
                         <div class="main-menu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home Page 1</a></li>
-                                            <li><a href="index2.html">Home Page 2</a></li>
-                                        </ul>
+                                    <li><a href="#">Home</a>
                                     </li>
-                                    <li><a href="#">Doctos <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="doctors.html">Doctor</a></li>
-                                            <li><a href="doctor-details.html">Doctor Details</a></li>
-                                        </ul>
+                                    <li><a href="#">Dokumen</a>
                                     </li>
-                                    <li><a href="#">Services <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="service.html">Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                        </ul>
+                                    <li><a href="#">Informasi</a>
+                                    <li><a href="#"></a>
                                     </li>
-                                    <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="appointment.html">Appointment</a></li>
-                                            <li><a href="time-table.html">Time Table</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="pricing.html">Our Pricing</a></li>
-                                            <li><a href="register.html">Sign Up</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="mail-success.html">Mail Success</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-single.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    
                                 </ul>
                             </nav>
                         </div>
                         <!--/ End Main Menu -->
-                    </div>
-                    <div class="col-lg-2 col-12">
-                        <div class="get-quote">
-                            <a href="appointment.html" class="btn">Book Appointment</a>
-                        </div>
                     </div>
                 </div>
             </div>
