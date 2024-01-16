@@ -20,7 +20,7 @@ class DocumentController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = DokumenModel::orderby('created_at')->get();
+            $data = DokumenModel::orderby('created_at','desc')->get();
            
 
             return Datatables::of($data)
@@ -28,15 +28,16 @@ class DocumentController extends Controller
                
                 ->addColumn('action', function ($row) {
                     $filePath=url('storage/'.$row->file);
-                    $downloadBtn ='<a href="'.$filePath.'" class="btn btn-sm round btn-outline-primary shadow mr-2" title="Download">
+                    $actionBtn ='<a href="'.$filePath.'" class="btn btn-sm round btn-outline-primary shadow mr-2" title="Download" target="_blank">
                     <i class="fa fa-fw fa-download"></i>
                     </a>';
                     $editAction=route('dokumen.edit',$row->id);
-                    $editBtn='<a href="'.$editAction.'" class="btn btn-sm round btn-outline-warning shadow mr-2" title="Ubah">
+                    $actionBtn.='<a href="'.$editAction.'" class="btn btn-sm round btn-outline-warning shadow mr-2" title="Ubah">
                     <i class="fa fa-fw fa-edit "></i>
                     </a>';
-                    $deleteBtn='  <a type="button" class="btn btn-sm round btn-outline-danger shadow" title="Hapus" label="Open Modal" data-toggle="modal" data-target="#modalDelete"> <i class="fas  fa-trash"></i></a>';
-                    return $downloadBtn.$editBtn. $deleteBtn;
+                    $dataDelete=$row->id.",'".$row->nama."'";
+                    $actionBtn.='  <a type="button" class="btn btn-sm round btn-outline-danger shadow" title="Hapus"   onclick="handleHapus('.$dataDelete.')"> <i class="fas  fa-trash"></i></a>';
+                    return $actionBtn;
                 })
                 ->editColumn('created_at', function ($row) {
                     Carbon::setLocale('id');
@@ -73,7 +74,7 @@ class DocumentController extends Controller
         $name=Str::slug($request->namaDokumen).'-'.time().'.'.$request->file->extension();
         
      
-        $path = $request->file('file')->storeAs('public/dokumen',$name);
+        $path = $request->file('file')->storeAs('dokumen',$name);
 
         DokumenModel::create([
             'nama'=>$request->namaDokumen,
@@ -85,6 +86,7 @@ class DocumentController extends Controller
         session()->flash('success','Dokumen Berhasil Ditambah.');
 
         return redirect()->route('dokumen.index');
+        // return response()->json(['success' => 'Dokumen berhasil ditambah']);
        
     }
 
@@ -128,7 +130,7 @@ class DocumentController extends Controller
  
        if($request->file){
         $name=Str::slug($request->nama).'-'.time().'.'.$request->file->extension();
-        $path = $request->file('file')->storeAs('public/dokumen',$name);
+        $path = $request->file('file')->storeAs('dokumen',$name);
         $data['file']=str_replace('public/','',$path);  
         Storage::disk('public')->delete($dokumen->file);
        } 
@@ -143,6 +145,13 @@ class DocumentController extends Controller
      
     public function destroy(string $id)
     {
-        //
+        $dokumen=DokumenModel::find($id);
+        if(!$dokumen) return redirect(route('dokumen.index'));
+
+        Storage::disk('public')->delete($dokumen->file);
+        $dokumen->delete();
+        session()->flash('success','Dokumen Berhasil Dihapus.');
+
+        return redirect()->route('dokumen.index');
     }
 }

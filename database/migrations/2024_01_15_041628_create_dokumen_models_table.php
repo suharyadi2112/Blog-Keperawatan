@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->text('file');
             $table->integer('id_user');
+            $table->integer('id_informasi')->nullable();
             $table->timestamps();
         });
     }
