@@ -22,10 +22,24 @@ class UserController extends Controller
     public function update(Request $request){
 
         $password=$request->password;
-        DB::table('users')->where('id',($request->id))->update([
-            'name'=>$request->name,
-            'password'=>Hash::make($password)
-        ]);
-        return redirect('profile/index');
+
+        if ($password!=null) {
+            
+            DB::table('users')->where('id',($request->id))->update([
+                'name'=>$request->name,
+                'username'=>$request->username,
+                'password'=>Hash::make($password)
+            ]);
+        } else {
+            # code...
+            DB::table('users')->where('id',($request->id))->update([
+                'name'=>$request->name,
+                'username'=>$request->username
+                // 'password'=>Hash::make($password)
+            ]);
+        }
+        
+        
+        return redirect('profile');
     }
 }
