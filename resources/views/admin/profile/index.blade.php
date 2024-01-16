@@ -23,6 +23,7 @@
                                     <tr>
                                         <th style="width: 10px">No.</th>
                                         <th>Nama User</th>
+                                        <th>Username</th>
                                         <th style="width: 40px">Action</th>
                                     </tr>
                                 </thead>
@@ -31,6 +32,7 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$m->name}}</td>
+                                        <td>{{$m->username}}</td>
                                         <td><a href="{{route('editprofile',$m->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
                                     </tr>
                                     @endforeach

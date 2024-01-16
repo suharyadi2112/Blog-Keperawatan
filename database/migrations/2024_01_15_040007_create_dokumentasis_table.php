@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama_dokumentasi');
             $table->string('foto_dokumentasi')->nullable();
-            $table->unsignedBigInteger('id_informasi');
+            $table->unsignedBigInteger('id_informasi')->nullable();
             $table->foreign('id_informasi')->references('id')->on('informasis')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

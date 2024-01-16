@@ -9,8 +9,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-
 use App\Models\Informasi;
+use App\Models\Dokumentasi;
+use Illuminate\Support\Facades\Storage;
 
 
 class InformasiController extends Controller
@@ -24,7 +25,7 @@ class InformasiController extends Controller
 
         if ($request->ajax()) {
 
-        $data = Informasi::query();
+        $data = Informasi::with('dokumentasis')->orderBy('id', 'DESC');
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -48,21 +49,43 @@ class InformasiController extends Controller
     }
 
     public function addInformasi(Request $request){
-        
+
         try {
 
             $request->merge(['id_user' => Auth::id()]);
             $validator = $this->validateInformasi($request, 'insert');
-
+                
             if ($validator->fails()) {
                 throw new ValidationException($validator);
             }
+
             DB::transaction(function () use ($request) {
-                Informasi::create([
+
+                $uploadedFiles = [];
+                if ($request->hasFile('file_dokumentasi')) {
+                    $files_dokumentasi = $request->file('file_dokumentasi');
+                    
+                    foreach ($files_dokumentasi as $file) {
+                        $nama_foto = time() . "_" . $file->getClientOriginalName();
+                        $file->storeAs('images/dokumentasi', $nama_foto, 'public');
+
+                        $uploadedFiles[] = [
+                            'nama_dokumentasi' => 'informasi',
+                            'foto_dokumentasi' => $nama_foto
+                        ];
+                    }
+                }
+                
+                $dokumentasiIds = [];
+                foreach ($uploadedFiles as $file) {
+                    $dokumentasiIds[] = Dokumentasi::create($file)->id;
+                }
+                $informasi = Informasi::create([
                     'id_user' => $request->id_user,
                     'judul_informasi' => $request->input('judul_informasi'),
                     'isi_informasi' => $request->input('isi_informasi'),
                 ]);
+                Dokumentasi::whereIn('id', $dokumentasiIds)->update(['id_informasi' => $informasi->id]);
             });
 
             return response()->json(['status' => 'success', 'message' => 'Informasi created', 'data' => $request->all()], 200);
@@ -86,7 +109,7 @@ class InformasiController extends Controller
     public function informasiByID($id){
         try {
             $record = Informasi::find($id);
-            return response()->json(['status' => 'success', 'message' => 'Informasi retrieved', 'data' => $record], 200);
+            return view('admin.informasi.detail_informasi', ['detailinfo' => $record->isi_informasi, 'judulInfo' => $record->judul_informasi]);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }

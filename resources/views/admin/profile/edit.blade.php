@@ -36,6 +36,10 @@
                                         <input type="text" class="form-control" value="{{$m->name}}" name="name">
                                     </div>
                                     <div class="form-group">
+                                        <label for="name">Username</label>
+                                        <input type="text" class="form-control" value="{{$m->username}}" name="username">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="name">New Password</label>
                                         <input type="password" class="form-control" name="password">
                                     </div>
