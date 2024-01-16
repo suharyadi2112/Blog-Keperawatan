@@ -19,7 +19,7 @@ class DokumentasiController extends Controller
     {
         if ($request->ajax()) {
             $data = Dokumentasi::select('id','nama_dokumentasi', 'foto_dokumentasi','created_at')
-                ->orderBy('created_at', 'desc');
+                ->latest();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -33,11 +33,14 @@ class DokumentasiController extends Controller
 
                     return $actionBtn;
                 })
+                ->editColumn('foto_dokumentasi', function ($row) {
+                    return '<img src="' . asset('storage/dokumentasi/' . $row->foto_dokumentasi) . '" alt="Foto Dokumentasi" width="50px" height="50px" style="object-fit: cover; object-position: center; border-radius: 10%;" id="modalImage" data-id="'.$row->id.'">';
+                })
                 ->editColumn('created_at', function ($row) {
                     Carbon::setLocale('id');
                     return Carbon::parse($row->created_at)->translatedFormat('l, d F Y - H:i:s');
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'foto_dokumentasi'])
                 ->make(true);
         }
         return view('admin.dokumentasi.index');
@@ -47,7 +50,7 @@ class DokumentasiController extends Controller
     {
         $request->validate([
             'nama_dokumentasi' => 'required|min:5|max:50',
-            'foto_dokumentasi' => $request->id ? 'image|mimes:jpeg,png,jpg,gif,svg|max:1024' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'foto_dokumentasi' => $request->id ? 'image|mimes:jpeg,png,jpg|max:1024' : 'required|image|mimes:jpeg,png,jpg|max:1024',
         ],[
             'nama_dokumentasi.required' => 'Nama dokumentasi tidak boleh kosong',
             'nama_dokumentasi.min' => 'Nama dokumentasi minimal 5 karakter',
@@ -66,13 +69,13 @@ class DokumentasiController extends Controller
             if ($request->id) {
                 $existingData = Dokumentasi::find($request->id);
                 if ($existingData && $existingData->foto_dokumentasi) {
-                    Storage::disk('public')->delete('images/dokumentasi/' . $existingData->foto_dokumentasi);
+                    Storage::disk('public')->delete('/dokumentasi' . $existingData->foto_dokumentasi);
                 }
             }
 
             $foto_dokumentasi = $request->file('foto_dokumentasi');
             $nama_foto = time() . "_" . $foto_dokumentasi->getClientOriginalName();
-            $foto_dokumentasi->storeAs('images/dokumentasi', $nama_foto, 'public');
+            $foto_dokumentasi->storeAs('/dokumentasi', $nama_foto, 'public');
         } elseif ($request->id) {
             $existingData = Dokumentasi::find($request->id);
             if ($existingData) {

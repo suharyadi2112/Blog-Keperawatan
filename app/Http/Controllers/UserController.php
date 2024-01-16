@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
         $user=DB::table('users')->get();
         return view('admin.profile.index',['user'=>$user]);

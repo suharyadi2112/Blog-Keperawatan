@@ -304,7 +304,7 @@ return [
         // Sidebar items:
         [
             'text' => 'Dashboard',
-            'url'  => 'home',
+            'url'  => 'dashboard',
             'icon' => 'fas fa-fw fa-home',
         ],
         [
@@ -319,7 +319,7 @@ return [
         [
             'text' => 'Dokumentasi',
             'url'  => 'dokumentasi',
-            'icon' => 'fas fa-camera'
+            'icon' => 'fas fa-fw fa-image',
         ],
         // [
         //     'text'        => 'users',

@@ -13,9 +13,9 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Data Dokumentasi</h3>
+                  <h3 class="card-title">Daftar Dokumentasi</h3>
                   <div class="card-tools">
-                      <a type="button" class="btn btn-sm btn-block btn-primary" id="modalCreate">Tambah Data</a>
+                      <a type="button" class="btn btn-sm btn-block btn-primary" id="modalCreate"><i class="fa fa-solid fa-plus"></i> Tambah Data</a>
                   </div>
                 </div>
                 <div class="card-body table-responsive">
@@ -35,7 +35,7 @@
           </div>
         </div>
     </section>
-    <div class="modal fade" id="modalOpen">
+    <div class="modal fade" id="modalOpen" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="postForm" name="postForm">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalDeleteOpen">
+    <div class="modal fade" id="modalDeleteOpen" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="postForm" name="postForm">
@@ -89,6 +89,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalImageOpen" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Dokumentasi</h5>
+                    <button type="button" class="close" id="closeImage">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @stop
 
 @section('css')
@@ -120,7 +137,7 @@
                     {data: 'foto_dokumentasi', name: 'foto_dokumentasi'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action'},
-                ]
+                ],
             });
 
             $('#modalCreate').click(function () {
@@ -150,6 +167,7 @@
                 $('#saveBtn').prop("disabled", false);
                 $('#modalOpen').modal('hide');
                 $('#modalDeleteOpen').modal('hide');
+                $('#modalImageOpen').modal('hide');
             }
 
             $('#closeForm').click(function () { clearForm(); });
@@ -169,7 +187,6 @@
                     contentType : false,
                     processData : false,
                     success: function (data) {
-                        console.log(data);
                         $('#saveBtn').html('Simpan');
                         clearForm();
                         table.draw(); 
@@ -179,7 +196,6 @@
                         })
                     },
                     error: function (data) {
-                        console.log(data);
                         var errorList = '<ul>';
                         $.each(data.responseJSON.errors, function(key, value){
                             $.each(value, function(i, error){  errorList += '<li>' + error + '</li>'; });
@@ -246,6 +262,22 @@
                     }
                 });
             })
+
+
+
+            $('body').on('click', '#modalImage', function (){
+                var id = $(this).data('id');
+                $.get("{{ route('dokumentasi') }}" +'/' + id , function (data) {
+                    $('#modalImageOpen').modal('show');
+                    $('.modal-body').prepend('<img src="{{asset('storage/dokumentasi/')}}' + '/' + data.foto_dokumentasi + '" class="img-fluid rounded mx-auto d-block" style="width: 100%; height: 350px; object-fit: contain;">');
+                })     
+            });
+
+
+            $('#closeImage').click(function () { 
+                $('.modal-body img').remove();
+                clearForm();
+            });
 
         });
     </script>
