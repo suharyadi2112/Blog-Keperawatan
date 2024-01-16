@@ -9,8 +9,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-
 use App\Models\Informasi;
+use App\Models\Dokumentasi;
+use Illuminate\Support\Facades\Storage;
 
 
 class InformasiController extends Controller
@@ -48,21 +49,43 @@ class InformasiController extends Controller
     }
 
     public function addInformasi(Request $request){
-        
+
         try {
 
             $request->merge(['id_user' => Auth::id()]);
             $validator = $this->validateInformasi($request, 'insert');
-
+                
             if ($validator->fails()) {
                 throw new ValidationException($validator);
             }
+
             DB::transaction(function () use ($request) {
-                Informasi::create([
+
+                $uploadedFiles = [];
+                if ($request->hasFile('file_dokumentasi')) {
+                    $files_dokumentasi = $request->file('file_dokumentasi');
+                    
+                    foreach ($files_dokumentasi as $file) {
+                        $nama_foto = time() . "_" . $file->getClientOriginalName();
+                        $file->storeAs('images/dokumentasi', $nama_foto, 'public');
+
+                        $uploadedFiles[] = [
+                            'nama_dokumentasi' => 'informasi',
+                            'foto_dokumentasi' => $nama_foto
+                        ];
+                    }
+                }
+                
+                $dokumentasiIds = [];
+                foreach ($uploadedFiles as $file) {
+                    $dokumentasiIds[] = Dokumentasi::create($file)->id;
+                }
+                $informasi = Informasi::create([
                     'id_user' => $request->id_user,
                     'judul_informasi' => $request->input('judul_informasi'),
                     'isi_informasi' => $request->input('isi_informasi'),
                 ]);
+                Dokumentasi::whereIn('id', $dokumentasiIds)->update(['id_informasi' => $informasi->id]);
             });
 
             return response()->json(['status' => 'success', 'message' => 'Informasi created', 'data' => $request->all()], 200);
@@ -99,6 +122,7 @@ class InformasiController extends Controller
                 'id_user' => 'required|max:12',
                 'judul_informasi' => 'required|string|max:100',
                 'isi_informasi' => 'required|nullable|string|max:10000',
+                'file_dokumentasi' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]);
         }
         return $validator;

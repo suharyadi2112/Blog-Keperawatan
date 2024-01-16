@@ -14,5 +14,11 @@ class Dokumentasi extends Model
     protected $fillable = [
         'nama_dokumentasi',
         'foto_dokumentasi',
+        'id_informasi'
     ];
+
+    public function informasi()
+    {
+        return $this->belongsTo(Informasi::class, 'id_informasi');
+    }
 }

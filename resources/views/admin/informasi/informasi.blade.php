@@ -54,15 +54,20 @@
           </button>
         </div>
         
-        <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}">
-        <div class="modal-body">
-            <div id="alertInfo"> </div>
-            <div class="form-group">
+        <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}" enctype="multipart/form-data">
+        <div class="modal-body row">
+            <div id="alertInfo" class="col-12"> </div>
+            <div class="form-group col-6">
                 <label for="exampleInputBorderWidth2">Judul Informasi</label>
                 <input type="text" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-6">
+                <label for="exampleInputBorderWidth2">Dokumentasi</label>
+                <input type="file" name="file_dokumentasi[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3" placeholder="Masukan judul informasi" multiple>
+            </div>
+
+            <div class="form-group col-12">
                 <label for="exampleInputBorderWidth2">Isi Informasi</label>
                 <textarea id="summernote" name="isi_informasi">
                     Masukan isi informasi disini
@@ -209,13 +214,16 @@
         $(document).on('submit', '#addInfomasiForm', function(e) {
             e.preventDefault();
             var route = $('#addInfomasiForm').data('route');
-            var form_data = $(this);
             $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
 
             $.ajax({
 		        type: 'POST',
 		        url: route,
-		        data: form_data.serialize(),
+                enctype: 'multipart/form-data',
+		        data: new FormData($('#addInfomasiForm')[0]),
+                dataType: 'json',
+                contentType: false,
+                processData: false,
 		        beforeSend: function() {
                     $('#overLayAdd').append('<div class="overlay progressAdd"><i class="fas fa-2x fa-sync fa-spin"></i></div>')
 		        	$('.btnSaveInformasi').prop('disabled', true);
