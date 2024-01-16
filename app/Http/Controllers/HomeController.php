@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user=DB::table('users')->get();
+        $dokumentasi=DB::table('dokumentasis')->get();
+        $informasi=DB::table('informasis')->get();
+        return view('home',['user'=>$user,'dokumentasi'=>$dokumentasi,'informasi'=>$informasi]);
     }
     public function tes(){
         return view('tes');

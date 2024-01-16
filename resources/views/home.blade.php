@@ -14,7 +14,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Dokumen</span>
                     <span class="info-box-number">
-                        0
+                        {{$dokumentasi->count()}}
                     </span>
                 </div>
 
@@ -27,7 +27,7 @@
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-info"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Informasi</span>
-                    <span class="info-box-number">0</span>
+                    <span class="info-box-number">{{$informasi->count()}}</span>
                 </div>
 
             </div>
@@ -53,7 +53,7 @@
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">User</span>
-                    <span class="info-box-number">0</span>
+                    <span class="info-box-number">{{$user->count()}}</span>
                 </div>
 
             </div>
