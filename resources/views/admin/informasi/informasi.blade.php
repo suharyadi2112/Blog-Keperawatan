@@ -21,6 +21,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+                <div id="alertInfoSuccess"> </div>
                 <div class="table table-responsive">
                     <table class="table table-hover text-nowrap table-bordered" id="informasiTable" width="100%">
                         <thead>
@@ -28,6 +29,7 @@
                             <th>Judul Informasi</th>
                             <th>Isi Informasi</th>
                             <th>Dokumentasi</th>
+                            <th>Dokumen</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -58,14 +60,19 @@
         <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}" enctype="multipart/form-data">
         <div class="modal-body row">
             <div id="alertInfo" class="col-12"> </div>
-            <div class="form-group col-6">
+            <div class="form-group col-12">
                 <label for="exampleInputBorderWidth2">Judul Informasi</label>
                 <input type="text" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
             </div>
 
             <div class="form-group col-6">
                 <label for="exampleInputBorderWidth2">Dokumentasi</label>
-                <input type="file" name="file_dokumentasi[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3" placeholder="Masukan judul informasi" multiple>
+                <input type="file" name="file_dokumentasi[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3" multiple>
+            </div>
+
+            <div class="form-group col-6">
+                <label for="exampleInputBorderWidth2">Dokumen</label>
+                <input type="file" name="file_dokumen[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth4" multiple>
             </div>
 
             <div class="form-group col-12">
@@ -157,10 +164,10 @@
                         } else {
                             dokumentasiHtml = 'No Dokumentasis';
                         }
-
                         return dokumentasiHtml;
                     }
                 },
+                {data: 'judul_informasi', name: 'judul_informasi'},
                 {data: 'action', name: 'action'},
             ],
             createdRow:function(row,data,index){
@@ -242,16 +249,15 @@
                     $('.listError').remove();
 		        },
 		        success: function(data) {
-                    var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Alert!</h5>Berhasil menyimpan informasi </div>';
-                    $('#alertInfo').append(successMsg);
-                    
+                    var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Berhasil!</h5>Berhasil menyimpan informasi </div>';
+                    $('#alertInfoSuccess').append(successMsg);
+                    $("#modal-informasi-add").modal("hide");
                     console.log(data)
 			    },
 		        complete: function() {
                     $('.progressAdd').remove();
 		        	$('.btnSaveInformasi').prop('disabled', false);
                     tableInformasi.ajax.reload();
-                    $("#modal-informasi-add").modal("hide");
 		        },
 		        error: function(data,xhr) {
                     if (data.status && data.status == 400) {

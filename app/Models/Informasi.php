@@ -23,5 +23,10 @@ class Informasi extends Model
     {
         return $this->hasMany(Dokumentasi::class, 'id_informasi', 'id');
     }
+
+    public function dokumen()
+    {
+        return $this->hasMany(DokumenModel::class, 'id_informasi', 'id');
+    }
 }
 

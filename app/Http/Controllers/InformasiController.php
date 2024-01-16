@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Informasi;
 use App\Models\Dokumentasi;
+use App\Models\DokumenModel;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -61,13 +62,14 @@ class InformasiController extends Controller
 
             DB::transaction(function () use ($request) {
 
+                //file dokumentasi -----------------
                 $uploadedFiles = [];
                 if ($request->hasFile('file_dokumentasi')) {
                     $files_dokumentasi = $request->file('file_dokumentasi');
                     
                     foreach ($files_dokumentasi as $file) {
                         $nama_foto = time() . "_" . $file->getClientOriginalName();
-                        $file->storeAs('images/dokumentasi', $nama_foto, 'public');
+                        $file->storeAs('dokumentasi', $nama_foto, 'public');
 
                         $uploadedFiles[] = [
                             'nama_dokumentasi' => 'informasi',
@@ -80,12 +82,40 @@ class InformasiController extends Controller
                 foreach ($uploadedFiles as $file) {
                     $dokumentasiIds[] = Dokumentasi::create($file)->id;
                 }
+
+                //file dokumen --------------------
+                $uploadedFilesDokumen = [];
+                if ($request->hasFile('file_dokumen')) {
+                    $files_dokumen = $request->file('file_dokumen');
+                    
+                    foreach ($files_dokumen as $file) {
+                        $nama_foto = time() . "_" . $file->getClientOriginalName();
+                        $path =  $file->storeAs('dokumen', $nama_foto, 'public');
+
+                        $uploadedFilesDokumen[] = [
+                            'id_user' => Auth::id(),
+                            'deskripsi' => 'dokumen informasi', 
+                            'nama' => 'informasi',
+                            'file' => str_replace('public/','',$path),
+                        ];
+                    }
+                }
+                
+                $dokumenIds = [];
+                foreach ($uploadedFilesDokumen as $fileDokumen) {
+                    $dokumenIds[] = DokumenModel::create($fileDokumen)->id;
+                }
+                
+                //-- Transaksi ----------------------------------
                 $informasi = Informasi::create([
                     'id_user' => $request->id_user,
                     'judul_informasi' => $request->input('judul_informasi'),
                     'isi_informasi' => $request->input('isi_informasi'),
                 ]);
                 Dokumentasi::whereIn('id', $dokumentasiIds)->update(['id_informasi' => $informasi->id]);
+                DokumenModel::whereIn('id', $dokumenIds)->update(['id_informasi' => $informasi->id]);
+
+
             });
 
             return response()->json(['status' => 'success', 'message' => 'Informasi created', 'data' => $request->all()], 200);
