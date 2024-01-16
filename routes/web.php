@@ -16,7 +16,7 @@ use App\Http\Controllers\DocumentController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes(
     [
@@ -44,6 +44,6 @@ Route::delete('/delInformasi/{id}', [App\Http\Controllers\InformasiController::c
 Route::get('/informasi/{id}', [App\Http\Controllers\InformasiController::class, 'informasiByID'])->name('informasiByID');
 
 
-Route::get('/profile/index', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
 Route::get('/profile/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editprofile');
 Route::post('/profile/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateprofile');

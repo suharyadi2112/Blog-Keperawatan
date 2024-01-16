@@ -342,7 +342,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'profile/index',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         // [

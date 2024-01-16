@@ -18,5 +18,10 @@ class Informasi extends Model
         'isi_informasi',
         'id_user',
     ];
+
+    public function dokumentasis()
+    {
+        return $this->hasMany(Dokumentasi::class, 'id_informasi');
+    }
 }
 
