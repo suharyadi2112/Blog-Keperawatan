@@ -14,7 +14,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Dokumen</span>
                     <span class="info-box-number">
-                        {{$dokumentasi->count()}}
+                       0
                     </span>
                 </div>
 
@@ -41,7 +41,7 @@
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-camera"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Dokumentasi</span>
-                    <span class="info-box-number">0</span>
+                    <span class="info-box-number"> {{$dokumentasi->count()}}</span>
                 </div>
 
             </div>
