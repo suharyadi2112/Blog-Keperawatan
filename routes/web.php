@@ -14,8 +14,12 @@ use App\Http\Controllers\DocumentController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
 })->name('welcome');
 
 Auth::routes(
