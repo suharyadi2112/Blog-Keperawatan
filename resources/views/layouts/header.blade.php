@@ -62,9 +62,10 @@
                                     <li><a href="#">Dokumen</a>
                                     </li>
                                     <li><a href="#">Informasi</a>
-                                    <li><a href="#"></a>
                                     </li>
-                                    
+                                    <li><a href="#">Dokumentasi</a>
+                                    </li>
+
                                 </ul>
                             </nav>
                         </div>
