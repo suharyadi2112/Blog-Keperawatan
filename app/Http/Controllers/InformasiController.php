@@ -25,7 +25,7 @@ class InformasiController extends Controller
 
         if ($request->ajax()) {
 
-        $data = Informasi::query()->orderBy('id', 'DESC');
+        $data = Informasi::with('dokumentasis')->orderBy('id', 'DESC');
 
         return DataTables::of($data)
             ->addIndexColumn()

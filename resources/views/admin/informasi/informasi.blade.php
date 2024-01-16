@@ -22,11 +22,12 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <div class="table table-responsive">
-                    <table class="table table-hover text-nowrap" id="informasiTable" width="100%">
+                    <table class="table table-hover text-nowrap table-bordered" id="informasiTable" width="100%">
                         <thead>
                         <tr>
                             <th>Judul Informasi</th>
                             <th>Isi Informasi</th>
+                            <th>Dokumentasi</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -140,15 +141,30 @@
                 {data: 'judul_informasi', name: 'judul_informasi'},
                 {data: 'isi_informasi', name: 'isi_informasi',
 
-                render: function(type, row, data){
+                    render: function(type, row, data){
 	            		return '<a href="informasi/'+data.id+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button></a>';
                     }
+                },
+                {data: 'dokumentasis',
+                    render: function(type, row, data) {
+                        let dokumentasiHtml = '';
+                        if (data.dokumentasis.length > 0) {
+                            for (let i = 0; i < data.dokumentasis.length; i++) {
+                                let link = '{{ asset("storage/dokumentasi/") }}' + '/' + data.dokumentasis[i].foto_dokumentasi;
+                                dokumentasiHtml += '<a href="' + link + '" target="_blank">' + data.dokumentasis[i].foto_dokumentasi + '</a><br>';
+                            }
+                        } else {
+                            dokumentasiHtml = 'No Dokumentasis';
+                        }
 
+                        return dokumentasiHtml;
+                    }
                 },
                 {data: 'action', name: 'action'},
             ],
             createdRow:function(row,data,index){
-		    	$('td',row).eq(2).attr("nowrap","nowrap");
+		    	$('td',row).eq(3).attr("nowrap","nowrap");
+		    	$('td',row).eq(2).css("text-align","left");
 			}
         });
         
