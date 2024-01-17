@@ -22,8 +22,8 @@ use App\Http\Controllers\DocumentController;
 Route::get('/', [App\Http\Controllers\FrontController::class, 'indexfrontend'])->name('welcome');
 Route::get('/dokumentasi', [App\Http\Controllers\FrontController::class, 'indexDokumentasi'])->name('frontend.dokumentasi');
 Route::get('/dokumen', [App\Http\Controllers\FrontController::class, 'indexDokumen'])->name('frontend.dokumen');
-Route::get('/dokumen/detail/{id}', [App\Http\Controllers\FrontController::class, 'dokumenDetail'])->name('frontend.dokumenDetail');
-
+Route::get('/informasi', [App\Http\Controllers\FrontController::class, 'indexInformasi'])->name('frontend.informasi');
+Route::get('/dokumen', [App\Http\Controllers\FrontController::class, 'indexDokumen'])->name('frontend.dokumen');
 
 
 Auth::routes(

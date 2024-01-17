@@ -33,4 +33,8 @@ class FrontController extends Controller
  
         return view('frontend.dokumen-detail')->with('dokumen',$dokumen);
     }
+    
+    public function indexInformasi(){
+        return view('frontend.informasi');
+    }
 }
