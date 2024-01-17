@@ -34,11 +34,14 @@ class InformasiController extends Controller
             ->addColumn('action', function($row){
 
                 $actionBtn = '
+                <a>
+                <button type="button" title="tambah file" class="btn btn-sm round btn-outline-secondary shadow addFile" data-id='.$row->id.'><i class="fa fa-solid fa-file"></i></button>
+                </a>
                 <a href="'.Route('informasiShowUpdate', ['id' => $row->id]).'">
-                <button type="button" class="btn btn-sm round btn-outline-info shadow"><i class="fa fa-solid fa-pen"></i></button>
+                <button type="button" title="edit informasi" class="btn btn-sm round btn-outline-info shadow"><i class="fa fa-solid fa-pen"></i></button>
                 </a>
                 <a>
-                <button type="button" class="btn btn-sm round btn-outline-danger shadow delInformasi" data-id='.$row->id.'><i class="fa fa-solid fa-trash"></i></button>
+                <button type="button" title="hapus informasi" class="btn btn-sm round btn-outline-danger shadow delInformasi" data-id='.$row->id.'><i class="fa fa-solid fa-trash"></i></button>
                 </a>';
                 return $actionBtn;
             })
@@ -205,47 +208,113 @@ class InformasiController extends Controller
 
     public function upFileDok(Request $request){
         try {
-
-            if ($request->tipeFile == 'dokumentasi') {
-                if ($request->hasFile('file_dok')) {
-                    if ($request->idFiless) {
-                        $existingData = Dokumentasi::find($request->idFiless);
-                        if ($existingData && $existingData->foto_dokumentasi) {
-                            Storage::disk('public')->delete('/dokumentasi' . $existingData->foto_dokumentasi);
-                        }
-                    }
-           
-                    $foto_dokumentasi = $request->file('file_dok');
-                    $nama_foto = time() . "_" . $foto_dokumentasi->getClientOriginalName();
-                    $foto_dokumentasi->storeAs('/dokumentasi', $nama_foto, 'public');
-    
-                    $informasi = Dokumentasi::find($request->idFiless);
-                    $informasi->update(['foto_dokumentasi' => $nama_foto]);   
-                }
-            }else if($request->tipeFile == 'dokumen'){
-
-                if($request->hasFile('file_dok')){
-                    $dokumen=DokumenModel::find($request->idFiless);
-                    
-                    $file_dokumen = $request->file('file_dok');
-                    $name=Str::slug($file_dokumen->getClientOriginalName()).'-'.time().'.'.$file_dokumen->extension();
-                    $path = $file_dokumen->storeAs('dokumen',$name);
-                    $data['file']=str_replace('public/','',$path);  
-                    Storage::disk('public')->delete($dokumen->file);
-                    
-                    $dokumen->update($data);
-                } 
             
-            }
+            DB::transaction(function () use ($request) {
+                if ($request->tipeFile == 'dokumentasi') {
+                    if ($request->hasFile('file_dok')) {
+                        if ($request->idFiless) {
+                            $existingData = Dokumentasi::find($request->idFiless);
+                            if ($existingData && $existingData->foto_dokumentasi) {
+                                Storage::disk('public')->delete('/dokumentasi' . $existingData->foto_dokumentasi);
+                            }
+                        }
+            
+                        $foto_dokumentasi = $request->file('file_dok');
+                        $nama_foto = time() . "_" . $foto_dokumentasi->getClientOriginalName();
+                        $foto_dokumentasi->storeAs('/dokumentasi', $nama_foto, 'public');
+        
+                        $informasi = Dokumentasi::find($request->idFiless);
+                        $informasi->update(['foto_dokumentasi' => $nama_foto]);   
+                    }
+                }else if($request->tipeFile == 'dokumen'){
 
-            return response()->json(['status' => 'success', 'message' => 'Dok file deleted', 'data' => null], 200);
+                    if($request->hasFile('file_dok')){
+                        $dokumen=DokumenModel::find($request->idFiless);
+                        
+                        $file_dokumen = $request->file('file_dok');
+                        $name=Str::slug($file_dokumen->getClientOriginalName()).'-'.time().'.'.$file_dokumen->extension();
+                        $path = $file_dokumen->storeAs('dokumen',$name);
+                        $data['file']=str_replace('public/','',$path);  
+                        Storage::disk('public')->delete($dokumen->file);
+                        
+                        $dokumen->update($data);
+                    } 
+                
+                }
+            });
+
+            return response()->json(['status' => 'success', 'message' => 'Dok file updated', 'data' => null], 200);
 
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
 
+    }
+
+    public function addFileDok(Request $request){
+
+        try {
             
-        return response()->json(['status' => 'success', 'message' => '', 'data' => $request->all()], 200);
+            DB::transaction(function () use ($request) {
+
+                if ($request->tipeFIless == 'dokumentasi') {
+                    
+                    $uploadedFiles = [];
+                    if ($request->hasFile('fileInformasi')) {
+                        $files_dokumentasi = $request->file('fileInformasi');
+                        
+                        foreach ($files_dokumentasi as $file) {
+                            $nama_foto = time() . "_" . $file->getClientOriginalName();
+                            $file->storeAs('dokumentasi', $nama_foto, 'public');
+
+                            $uploadedFiles[] = [
+                                'nama_dokumentasi' => 'informasi',
+                                'foto_dokumentasi' => $nama_foto
+                            ];
+                        }
+                    }
+                    
+                    $dokumentasiIds = [];
+                    foreach ($uploadedFiles as $file) {
+                        $dokumentasiIds[] = Dokumentasi::create($file)->id;
+                    }
+                    Dokumentasi::whereIn('id', $dokumentasiIds)->update(['id_informasi' => $request->idInformasi]);
+
+                }elseif ($request->tipeFIless == 'dokumen') {
+
+                    $uploadedFilesDokumen = [];
+                    if ($request->hasFile('fileInformasi')) {
+                        $files_dokumen = $request->file('fileInformasi');
+                        
+                        foreach ($files_dokumen as $file) {
+                            
+                            $nama_foto=Str::slug($file->getClientOriginalName()).'-'.time().'.'.$file->extension();
+                            $path =  $file->storeAs('dokumen', $nama_foto, 'public');
+
+                            $uploadedFilesDokumen[] = [
+                                'id_user' => Auth::id(),
+                                'deskripsi' => 'dokumen informasi', 
+                                'nama' => 'informasi',
+                                'file' => str_replace('public/','',$path),
+                            ];
+                        }
+                    }
+                    
+                    $dokumenIds = [];
+                    foreach ($uploadedFilesDokumen as $fileDokumen) {
+                        $dokumenIds[] = DokumenModel::create($fileDokumen)->id;
+                    }
+                    DokumenModel::whereIn('id', $dokumenIds)->update(['id_informasi' => $request->idInformasi]);
+                }
+
+            });
+
+            return response()->json(['status' => 'success', 'message' => 'file success add', 'data' => null], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
+        
     }
 
     private function validateInformasi(Request $request, $action = 'insert')
