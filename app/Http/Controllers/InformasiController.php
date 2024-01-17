@@ -146,7 +146,7 @@ class InformasiController extends Controller
 
             return response()->json(['success' => 'Dokumentasi berhasil dihapus']);
 
-        return response()->json(['status' => 'success', 'message' => 'Informasi deleted', 'data' => null], 200);
+            return response()->json(['status' => 'success', 'message' => 'Informasi deleted', 'data' => null], 200);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
@@ -164,8 +164,6 @@ class InformasiController extends Controller
     public function informasiShowUpdate($id){
         try {
             $data = Informasi::find($id);
-            // $dataDokumentasi = Dokumentasi::where('id_informasi', $id)->select('foto_dokumentasi')->get();
-            // $dataDokumen = DokumenModel::find($id);
 
             return view('admin.informasi.edit_informasi', ['informasi' => $data]);
         } catch (\Exception $e) {
@@ -180,6 +178,74 @@ class InformasiController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Informasi updated', 'data' => null], 200);
 
+    }
+
+    public function delFileDokumentasi(Request $request){
+
+        try {
+
+            if ($request->tipe == 'dokumentasi') {
+                $dokumentasi = Dokumentasi::where('id', $request->idFile)->first();
+                if ($dokumentasi->foto_dokumentasi != null || Storage::disk('public')->exists('dokumentasi/' . $dokumentasi->foto_dokumentasi)) {
+                    Storage::disk('public')->delete('dokumentasi/' . $dokumentasi->foto_dokumentasi);
+                }
+                $dokumentasi->delete();
+            }else if($request->tipe == 'dokumen'){
+                $dokumen=DokumenModel::where('id', $request->idFile)->first();
+                Storage::disk('public')->delete($dokumen->file);
+                $dokumen->delete();
+            }
+
+            return response()->json(['status' => 'success', 'message' => 'Dokumentasi file deleted', 'data' => null], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
+
+    }
+
+    public function upFileDok(Request $request){
+        try {
+
+            if ($request->tipeFile == 'dokumentasi') {
+                if ($request->hasFile('file_dok')) {
+                    if ($request->idFiless) {
+                        $existingData = Dokumentasi::find($request->idFiless);
+                        if ($existingData && $existingData->foto_dokumentasi) {
+                            Storage::disk('public')->delete('/dokumentasi' . $existingData->foto_dokumentasi);
+                        }
+                    }
+           
+                    $foto_dokumentasi = $request->file('file_dok');
+                    $nama_foto = time() . "_" . $foto_dokumentasi->getClientOriginalName();
+                    $foto_dokumentasi->storeAs('/dokumentasi', $nama_foto, 'public');
+    
+                    $informasi = Dokumentasi::find($request->idFiless);
+                    $informasi->update(['foto_dokumentasi' => $nama_foto]);   
+                }
+            }else if($request->tipeFile == 'dokumen'){
+
+                if($request->hasFile('file_dok')){
+                    $dokumen=DokumenModel::find($request->idFiless);
+                    
+                    $file_dokumen = $request->file('file_dok');
+                    $name=Str::slug($file_dokumen->getClientOriginalName()).'-'.time().'.'.$file_dokumen->extension();
+                    $path = $file_dokumen->storeAs('dokumen',$name);
+                    $data['file']=str_replace('public/','',$path);  
+                    Storage::disk('public')->delete($dokumen->file);
+                    
+                    $dokumen->update($data);
+                } 
+            
+            }
+
+            return response()->json(['status' => 'success', 'message' => 'Dok file deleted', 'data' => null], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
+
+            
+        return response()->json(['status' => 'success', 'message' => '', 'data' => $request->all()], 200);
     }
 
     private function validateInformasi(Request $request, $action = 'insert')

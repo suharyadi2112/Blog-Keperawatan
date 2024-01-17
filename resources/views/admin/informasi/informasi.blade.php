@@ -94,6 +94,42 @@
   </div>
 
 
+  <div class="modal fade" id="modal-informasi-up-file">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="overLayAdd"></div>
+        <div class="modal-header">
+          <h4 class="modal-title">Ganti file</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <form method="POST" id="upFileForm" data-route="{{ route('upFileDok') }}" enctype="multipart/form-data">
+        <div class="modal-body row">
+            <div id="alertInfo" class="col-12"> </div>
+        
+            <div class="form-group col-12">
+                <label for="exampleInputBorderWidth2">File</label>
+                <input type="input" name="idFiless" id="idFiless" >
+                <input type="input" name="tipeFile" id="tipeFile" >
+                <input type="file" name="file_dok" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3">
+            </div>
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btnUpFile">Save changes</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  
+
+
 @stop
 
 @section('css')
@@ -123,7 +159,9 @@
                             for (let i = 0; i < data.dokumentasis.length; i++) {
                                 let link = '{{ asset("storage/dokumentasi/") }}' + '/' + data.dokumentasis[i].foto_dokumentasi;
 
-                                dokumentasiHtml += '<a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-info shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+ data.dokumentasis[i].foto_dokumentasi+'</button></a><br>';
+                                dokumentasiHtml += '<div class="btn-group"><button type="button" class="btn btn-outline-danger shadow-sm delFile btn-sm pb-1 mb-1" data-tipe="dokumentasi"  data-id="'+data.dokumentasis[i].id+'"><i class="fa fa-solid fa-trash"></i></button>'+
+
+                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumentasi"  data-id="'+data.dokumentasis[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+ data.dokumentasis[i].foto_dokumentasi+'</button></a><br>';
                             }
                         } else {
                             dokumentasiHtml = 'No Dokumentasis';
@@ -139,7 +177,10 @@
                                 var parts = data.dokumen[i].file.split('/');//split /dokumen
                                 var namaDokumenFix = parts[1];
                                 let link = '{{ asset("storage/") }}' + '/' + data.dokumen[i].file;
-                                dokumen += '<a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-info shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+namaDokumenFix+'</button></a><br>';
+
+                                dokumen += '<div class="btn-group"><button type="button" class="btn btn-outline-danger shadow-sm delFile btn-sm pb-1 mb-1" data-tipe="dokumen"  data-id="'+data.dokumen[i].id+'"><i class="fa fa-solid fa-trash"></i></button>'+
+
+                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumen"  data-id="'+data.dokumen[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+namaDokumenFix+'</button></a><br>';
                             }
                         } else {
                             dokumen = 'No Dokumen';
@@ -153,6 +194,41 @@
 		    	$('td',row).eq(3).attr("nowrap","nowrap");
 		    	$('td',row).eq(2).css("text-align","left");
 			}
+        });
+
+        //del file spesific
+        $(document).on("click", ".delFile", function () {
+            var result = confirm("Hapus file ini ?");
+                if (result) {
+                $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+                var idToSend = {
+                    idFile: $(this).data('id'),
+                    tipe: $(this).data('tipe')
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('delFileDokumentasi') }}",
+                    data: idToSend,
+                    beforeSend: function() {
+                        $('.alertSuccess').remove();
+                        $('.delFile').prop('disabled', true);
+                    },
+                    success: function(data) {
+                        alert("Berhasil dihapus");
+                        tableInformasi.ajax.reload();
+                    },
+                    complete: function() {
+                        $('.delFile').prop('disabled', false);
+                    },
+                    error: function(data,xhr) {
+                        if (data.status && data.status == 400) {
+                            
+                        }
+                        console.log(data.responseJSON)
+                        console.log(data)
+                    },
+                });
+            }
         });
         
 
@@ -187,6 +263,48 @@
                     }
                 });
             }
+        });
+
+        $(document).on("click", ".upFile", function () {
+            $("#modal-informasi-up-file").modal("show");
+            var idFilee = $(this).attr('data-id');
+            var tipeFile = $(this).attr('data-tipe');
+            $('#idFiless').val(idFilee);
+            $('#tipeFile').val(tipeFile);
+        });
+        
+        //update file spesific
+        $(document).on('submit', '#upFileForm', function(e) {
+            e.preventDefault();
+            var route = $('#upFileForm').data('route');
+            $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+
+            $.ajax({
+		        type: 'POST',
+		        url: route,
+                enctype: 'multipart/form-data',
+		        data: new FormData($('#upFileForm')[0]),
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+		        beforeSend: function() {
+                    $('.btnUpFile').prop('disabled', true);
+                    $('.listError').remove();
+		        },
+		        success: function(data) {
+                    var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Berhasil!</h5>Berhasil mengubah file dokumentasi </div>';
+                    $('#alertInfoSuccess').append(successMsg);
+			    },
+		        complete: function() {
+                    tableInformasi.ajax.reload();
+                    $('.btnUpFile').prop('disabled', false);
+		        },
+		        error: function(data,xhr) {
+                    console.log(data.responseJSON)
+                    console.log(data)
+		        },
+		    });
+
         });
 
         //store infomasi

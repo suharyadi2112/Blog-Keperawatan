@@ -52,6 +52,9 @@ Route::delete('/dashboard/delInformasi/{id}', [App\Http\Controllers\InformasiCon
 Route::get('/dashboard/informasi/{id}', [App\Http\Controllers\InformasiController::class, 'informasiByID'])->name('informasiByID');
 Route::get('/dashboard/informasi/update/{id}', [App\Http\Controllers\InformasiController::class, 'informasiShowUpdate'])->name('informasiShowUpdate');
 Route::post('/dashboard/informasi/update/proses/{id}', [App\Http\Controllers\InformasiController::class, 'upDateInformasi'])->name('upDateInformasi');
+Route::post('/dashboard/informasi/del/doktasi', [App\Http\Controllers\InformasiController::class, 'delFileDokumentasi'])->name('delFileDokumentasi');
+Route::post('/dashboard/informasi/up/doktasi', [App\Http\Controllers\InformasiController::class, 'upFileDok'])->name('upFileDok');
+
 
 
 
