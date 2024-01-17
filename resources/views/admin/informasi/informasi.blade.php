@@ -26,11 +26,11 @@
                     <table class="table table-hover text-nowrap table-bordered" id="informasiTable" width="100%">
                         <thead>
                         <tr>
+                            <th>Action</th>
                             <th>Judul Informasi</th>
                             <th>Isi Informasi</th>
                             <th>Dokumentasi</th>
                             <th>Dokumen</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -111,8 +111,8 @@
         
             <div class="form-group col-12">
                 <label for="exampleInputBorderWidth2">File</label>
-                <input type="input" name="idFiless" id="idFiless" >
-                <input type="input" name="tipeFile" id="tipeFile" >
+                <input type="hidden" name="idFiless" id="idFiless" >
+                <input type="hidden" name="tipeFile" id="tipeFile" >
                 <input type="file" name="file_dok" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3">
             </div>
 
@@ -128,6 +128,50 @@
     <!-- /.modal-dialog -->
   </div>
   
+{{-- add spesific file --}}
+  <div class="modal fade" id="modal-add-file-spesific">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div id="overLayAdd"></div>
+        <div class="modal-header">
+          <h4 class="modal-title">Tambahkan file</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <form method="POST" id="addFileForm" data-route="{{ route('addFileDok') }}" enctype="multipart/form-data">
+        <div class="modal-body row">
+            <div id="alertInfo" class="col-12"> </div>
+            
+            <div class="form-group col-6">
+                <label for="">Tipe File</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" id="customRadio1" value="dokumen" name="tipeFIless">
+                    <label for="customRadio1" class="custom-control-label">Dokumen</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" id="customRadio2" value="dokumentasi" name="tipeFIless">
+                    <label for="customRadio2" class="custom-control-label">Dokumentasi</label>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <input type="hidden" name="idInformasi" id="idInformasi">
+                <label for="">File</label>
+                <input type="file" name="fileInformasi[]" id="fileInformasi" class="form-control form-control-border border-width-2" multiple>
+            </div>
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btnAddFile">Save changes</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 
 
 @stop
@@ -145,6 +189,7 @@
             searching: false,
             ajax: "{{ route('indexinformasi') }}",
             columns: [
+                {data: 'action', name: 'action'},
                 {data: 'judul_informasi', name: 'judul_informasi'},
                 {data: 'isi_informasi', name: 'isi_informasi',
 
@@ -188,10 +233,12 @@
                         return dokumen;
                     }
                 },
-                {data: 'action', name: 'action'},
             ],
             createdRow:function(row,data,index){
 		    	$('td',row).eq(3).attr("nowrap","nowrap");
+		    	$('td',row).eq(0).css("vertical-align","middle");
+		    	$('td',row).eq(1).css("vertical-align","middle");
+		    	$('td',row).eq(2).css("vertical-align","middle");
 		    	$('td',row).eq(2).css("text-align","left");
 			}
         });
@@ -231,7 +278,7 @@
             }
         });
         
-
+        //add informasi
         $(document).on("click", ".showAddInfo", function () {
             $("#modal-informasi-add").modal("show");
       
@@ -265,6 +312,50 @@
             }
         });
 
+        //add file spesific
+        $(document).on("click", ".addFile", function () {
+            $("#modal-add-file-spesific").modal("show");
+            var idInformasi = $(this).attr('data-id');
+            $('#idInformasi').val(idInformasi);
+        });
+        $(document).on('submit', '#addFileForm', function(e) {
+            var result = confirm("File yang pilih sudah benar ?");
+            if (result) {
+                e.preventDefault();
+                var route = $('#addFileForm').data('route');
+                $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+
+                $.ajax({
+                    type: 'POST',
+                    url: route,
+                    enctype: 'multipart/form-data',
+                    data: new FormData($('#addFileForm')[0]),
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('.btnAddFile').prop('disabled', true);
+                        $('.listError').remove();
+                    },
+                    success: function(data) {
+                        var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Berhasil!</h5>Berhasil menambah file </div>';
+                        $('#alertInfoSuccess').append(successMsg);
+                    },
+                    complete: function() {
+                        tableInformasi.ajax.reload();
+                        $('.btnAddFile').prop('disabled', false);
+                    },
+                    error: function(data,xhr) {
+                        console.log(data.responseJSON)
+                        console.log(data)
+                    },
+                });
+            }
+        });
+
+
+
+        //update file spesific
         $(document).on("click", ".upFile", function () {
             $("#modal-informasi-up-file").modal("show");
             var idFilee = $(this).attr('data-id');
@@ -272,8 +363,6 @@
             $('#idFiless').val(idFilee);
             $('#tipeFile').val(tipeFile);
         });
-        
-        //update file spesific
         $(document).on('submit', '#upFileForm', function(e) {
             e.preventDefault();
             var route = $('#upFileForm').data('route');
