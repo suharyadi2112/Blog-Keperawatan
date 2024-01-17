@@ -22,6 +22,8 @@ Route::get('/', function () {
     return view('frontend.index');
 })->name('welcome');
 
+
+
 Auth::routes(
     [
         'register' => true,
