@@ -15,7 +15,7 @@ class FrontController extends Controller
 
     public function indexfrontend()
     {
-        $dokumens=DokumenModel::orderby('created_at','desc')->limit(5)->get();
+        $dokumens=DokumenModel::orderby('created_at','desc')->limit(3)->get();
         return view('frontend.index')->with('dokumens',$dokumens);
     }
 
