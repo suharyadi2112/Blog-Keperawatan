@@ -135,7 +135,7 @@
         const handleHapus = (id, nama) => {
             console.log(nama)
 
-            var url = window.location.origin + '/dokumen/' + id;
+            var url = window.location.origin + '/dashboard/dokumen/' + id;
             $('#modalDelete').modal('show');
             $('#namaDokumen').html(nama)
             $('#formHapus').prop("action", url);
