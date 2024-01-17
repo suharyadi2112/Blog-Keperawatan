@@ -63,7 +63,7 @@
                                     </li>
                                     <li><a href="#">Informasi</a>
                                     </li>
-                                    <li><a href="#">Dokumentasi</a>
+                                    <li><a href="{{ route('frontend.dokumentasi') }}">Dokumentasi</a>
                                     </li>
 
                                 </ul>
