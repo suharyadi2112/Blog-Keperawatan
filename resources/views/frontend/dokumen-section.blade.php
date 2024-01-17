@@ -27,13 +27,21 @@
                                     {{ $dokumen->deskripsi }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ 'storage/'. $dokumen->file}}"  class="btn btn-sm round btn-outline-primary text-light shadow mr-2">
+
+
+                                    
+<a href="{{ 'storage/'. $dokumen->file}}"  class="btn btn-sm round btn-outline-primary text-light shadow mr-2">
+                                    <a href="{{ route('frontend.dokumenDetail', $dokumen->id) }}"
+                                        class="btn btn-sm round btn-outline-primary shadow mr-2">
                                         <i class="fa fas fa-search"></i>
 
                                     </a>
                                 </td>
                             </tr>
                         @empty
+                            <tr data-widget="expandable-table" aria-expanded="false">
+                                <td colspan="3" class="text-center"><em>Tidak ada dokumen</em></td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
