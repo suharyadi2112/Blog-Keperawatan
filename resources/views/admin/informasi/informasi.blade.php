@@ -340,12 +340,16 @@
                     success: function(data) {
                         var successMsg = '<div class="alert alert-success alert-dismissible listError"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-check"></i> Berhasil!</h5>Berhasil menambah file </div>';
                         $('#alertInfoSuccess').append(successMsg);
+                        $("#modal-add-file-spesific").modal("hide");
                     },
                     complete: function() {
                         tableInformasi.ajax.reload();
                         $('.btnAddFile').prop('disabled', false);
                     },
                     error: function(data,xhr) {
+                        if (data.status && data.status == 400) {
+                            alert("format file tidak sesuai")
+                        }
                         console.log(data.responseJSON)
                         console.log(data)
                     },

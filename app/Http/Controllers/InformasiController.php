@@ -258,7 +258,16 @@ class InformasiController extends Controller
             DB::transaction(function () use ($request) {
 
                 if ($request->tipeFIless == 'dokumentasi') {
-                    
+
+                    $request->validate([
+                        'fileInformasi.*' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2024',
+                    ],[
+                        'fileInformasi.*.required' => 'Foto dokumentasi tidak boleh kosong',
+                        'fileInformasi.*.image' => 'Foto dokumentasi harus berupa gambar',
+                        'fileInformasi.*.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg,jpg, png,gif,svg',
+                        'fileInformasi.*.max' => 'Foto dokumentasi maksimal berukuran 2 MB',
+                    ]);
+
                     $uploadedFiles = [];
                     if ($request->hasFile('fileInformasi')) {
                         $files_dokumentasi = $request->file('fileInformasi');
@@ -282,6 +291,14 @@ class InformasiController extends Controller
 
                 }elseif ($request->tipeFIless == 'dokumen') {
 
+                    $request->validate([
+                        'fileInformasi.*'=>'mimes:xlsx,xls,csv,xlsm,docx,doc,pptx,ppt,pdf|max:2048'
+                    ],[
+                        'fileInformasi.*.required'=> 'File Harus Dipilih.',
+                        'fileInformasi.*.max'=> 'Ukuran file terlalu besar. Disarankan maksimal 2 MB.',
+                        'fileInformasi.*.mimes'=>'Format Dokumen tidak sesuai. Disarankan : doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv'
+                    ]);
+                    
                     $uploadedFilesDokumen = [];
                     if ($request->hasFile('fileInformasi')) {
                         $files_dokumen = $request->file('fileInformasi');
@@ -310,7 +327,8 @@ class InformasiController extends Controller
             });
 
             return response()->json(['status' => 'success', 'message' => 'file success add', 'data' => null], 200);
-
+        } catch (ValidationException $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->errors(), 'data' => null], 400);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
