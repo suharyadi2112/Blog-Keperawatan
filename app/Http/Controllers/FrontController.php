@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DokumenModel;
+use App\Models\DokumenModel as ModelsDokumenModel;
  
 
 
@@ -30,8 +31,10 @@ class FrontController extends Controller
     }
 
     public function indexDokumen(){
-        return view('frontend.dokumen');
+        $dokumens=ModelsDokumenModel::orderby('created_at','desc')->get();
+        return view('frontend.dokumen')->with('dokumens',$dokumens);;
     }
+
     public function dokumenDetail($id){
         $dokumen=DokumenModel::find($id);
         if(!$dokumen) return redirect(route('welcome'));

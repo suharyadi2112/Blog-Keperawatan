@@ -27,11 +27,10 @@
                                     {{ $dokumen->deskripsi }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('frontend.dokumenDetail', $dokumen->id) }}"
-                                        class="btn btn-sm round btn-outline-primary shadow mr-2">
-                                        <i class="fa fas fa-search"></i>
+                                    <a href="{{ 'storage/' . $dokumen->file }}"
+                                        class="btn btn-sm round btn-outline-primary text-light shadow mr-2"><i
+                                            class="fa fas fa-search"></i></a>
 
-                                    </a>
                                 </td>
                             </tr>
                         @empty

@@ -57,9 +57,9 @@
                         <div class="main-menu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li><a href="#">Home</a>
+                                    <li><a href="{{route('welcome')}}">Home</a>
                                     </li>
-                                    <li><a href="#">Dokumen</a>
+                                    <li><a href="{{route('frontend.dokumen')}}">Dokumen</a>
                                     </li>
                                     <li><a href="#">Informasi</a>
                                     </li>
