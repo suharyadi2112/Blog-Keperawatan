@@ -45,7 +45,7 @@
                     <div class="col-lg-3 col-md-3 col-12">
                         <!-- Start Logo -->
                         <div class="logo mb-3">
-                            <a href="#"><img src="assets/img/rsud.jpg" alt="#"></a>
+                            <a href="{{ route('welcome') }}"><img src="assets/img/rsud.jpg" alt="#"></a>
                         </div>
                         <!-- End Logo -->
                         <!-- Mobile Nav -->

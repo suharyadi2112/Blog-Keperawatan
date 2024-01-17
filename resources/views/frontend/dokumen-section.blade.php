@@ -12,18 +12,35 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Dokumen</th>
-                            <th>Tanggal Publis</th>
-                            <th>Detail</th>
+                            <th width="30px"class="text-center">No</th>
+                            <th> Dokumen</th>
+
+                            <th class="text-center">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-widget="expandable-table" aria-expanded="false">
-                            <td>183</td>
-                        </tr>
+                        @forelse ($dokumens as $i=>$dokumen)
+                            <tr data-widget="expandable-table" aria-expanded="false">
+                                <td class="text-center">{{ $i + 1 }}</td>
+                                <td>
+                                    <p> <strong> {{ $dokumen->nama }}</strong></p>
+                                    {{ $dokumen->deskripsi }}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm round btn-outline-primary shadow mr-2">
+                                        <i class="fa fas fa-search"></i>
+
+                                    </button>
+                                </td>
+                            </tr>
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <a href="{{ route('frontend.dokumen') }}" class="btn btn-primary btn-sm text-light">Lihat Dokumen
+                        Lainnya</a>
+                </div>
             </div>
         </div>
     </div>
