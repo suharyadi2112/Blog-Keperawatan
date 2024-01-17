@@ -133,7 +133,20 @@ class InformasiController extends Controller
         try {
             $record = Informasi::find($id);
             $record->delete();
-            return response()->json(['status' => 'success', 'message' => 'Informasi deleted', 'data' => null], 200);
+            
+            $dokumen=DokumenModel::where('id_informasi', $id)->first();
+            Storage::disk('public')->delete($dokumen->file);
+            $dokumen->delete();
+
+            $dokumentasi = Dokumentasi::where('id_informasi', $id)->first();
+            if ($dokumentasi->foto_dokumentasi != null || Storage::disk('public')->exists('dokumentasi/' . $dokumentasi->foto_dokumentasi)) {
+                Storage::disk('public')->delete('dokumentasi/' . $dokumentasi->foto_dokumentasi);
+            }
+            $dokumentasi->delete();
+
+            return response()->json(['success' => 'Dokumentasi berhasil dihapus']);
+
+        return response()->json(['status' => 'success', 'message' => 'Informasi deleted', 'data' => null], 200);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }
