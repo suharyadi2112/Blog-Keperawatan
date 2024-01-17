@@ -28,4 +28,8 @@ class FrontController extends Controller
     public function indexDokumentasi(){
         return view('frontend.dokumentasi');
     }
+
+    public function indexDokumen(){
+        return view('frontend.dokumen');
+    }
 }
