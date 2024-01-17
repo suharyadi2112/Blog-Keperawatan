@@ -13,6 +13,7 @@ use App\Models\Informasi;
 use App\Models\Dokumentasi;
 use App\Models\DokumenModel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class InformasiController extends Controller
@@ -89,7 +90,9 @@ class InformasiController extends Controller
                     $files_dokumen = $request->file('file_dokumen');
                     
                     foreach ($files_dokumen as $file) {
-                        $nama_foto = time() . "_" . $file->getClientOriginalName();
+                        
+                        $nama_foto=Str::slug($file->getClientOriginalName()).'-'.time().'.'.$file->extension();
+                        // $name = time() . "_" . $file->getClientOriginalName();
                         $path =  $file->storeAs('dokumen', $nama_foto, 'public');
 
                         $uploadedFilesDokumen[] = [
