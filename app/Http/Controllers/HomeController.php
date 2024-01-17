@@ -12,6 +12,9 @@ class HomeController extends Controller
      *
      * @return void
      */
+
+    
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,9 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user=DB::table('users')->get();
-        $dokumentasi=DB::table('dokumentasis')->get();
-        $informasi=DB::table('informasis')->get();
-        return view('home',['user'=>$user,'dokumentasi'=>$dokumentasi,'informasi'=>$informasi]);
+        $user = DB::table('users')->get();
+        $dokumentasi = DB::table('dokumentasis')->get();
+        $dokumen = DB::table('dokumen_models')->get();
+        $informasi = DB::table('informasis')->where('deleted_at', null)->get();
+        return view('home', ['user' => $user, 'dokumentasi' => $dokumentasi,'dokumen' => $dokumen, 'informasi' => $informasi]);
     }
 }

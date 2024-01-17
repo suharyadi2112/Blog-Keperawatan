@@ -7,8 +7,8 @@
                 <div class="col-lg-6 col-md-5 col-12">
                     <!-- Contact -->
                     <ul class="top-link">
-                        <li><i class="fa fa-phone"></i>+880 1234 56789</li>
-                        <li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">support@yourmail.com</a>
+                        <li><i class="fa fa-phone"></i> +6281275812812 (Jam Kerja)</li>
+                        
                         </li>
                     </ul>
                     <!-- End Contact -->
@@ -44,8 +44,8 @@
                 <div class="row ">
                     <div class="col-lg-3 col-md-3 col-12">
                         <!-- Start Logo -->
-                        <div class="logo">
-                            <a href="#"><img src="assets/img/rsud.jpg" alt="#"></a>
+                        <div class="logo mb-3">
+                            <a href="{{ route('welcome') }}"><img src="assets/img/rsud.jpg" alt="#"></a>
                         </div>
                         <!-- End Logo -->
                         <!-- Mobile Nav -->
@@ -57,13 +57,13 @@
                         <div class="main-menu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li><a href="#">Home</a>
+                                    <li><a href="{{ route('welcome') }}">Beranda</a>
                                     </li>
-                                    <li><a href="#">Dokumen</a>
+                                    <li><a href="{{ route('frontend.dokumen') }}">Dokumen</a>
                                     </li>
-                                    <li><a href="#">Informasi</a>
+                                    <li><a href="{{ route('frontend.informasi') }}">Informasi</a>
                                     </li>
-                                    <li><a href="#">Dokumentasi</a>
+                                    <li><a href="{{ route('frontend.dokumentasi') }}">Dokumentasi</a>
                                     </li>
 
                                 </ul>

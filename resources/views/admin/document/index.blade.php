@@ -11,6 +11,7 @@
 
     @if (session()->has('success'))
         <div class="alert m-2 alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             {{ session()->get('success') }}
         </div>
     @endif
@@ -135,7 +136,7 @@
         const handleHapus = (id, nama) => {
             console.log(nama)
 
-            var url = window.location.origin + '/dokumen/' + id;
+            var url = window.location.origin + '/dashboard/dokumen/' + id;
             $('#modalDelete').modal('show');
             $('#namaDokumen').html(nama)
             $('#formHapus').prop("action", url);

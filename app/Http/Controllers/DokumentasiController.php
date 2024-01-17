@@ -105,8 +105,8 @@ class DokumentasiController extends Controller
     {
         // return response()->json($id);
         $dokumentasi = Dokumentasi::where('id', $id)->first();
-        if ($dokumentasi->foto_dokumentasi != null || Storage::disk('public')->exists('images/dokumentasi/' . $dokumentasi->foto_dokumentasi)) {
-            Storage::disk('public')->delete('images/dokumentasi/' . $dokumentasi->foto_dokumentasi);
+        if ($dokumentasi->foto_dokumentasi != null || Storage::disk('public')->exists('dokumentasi/' . $dokumentasi->foto_dokumentasi)) {
+            Storage::disk('public')->delete('dokumentasi/' . $dokumentasi->foto_dokumentasi);
         }
         $dokumentasi->delete();
         return response()->json(['success' => 'Dokumentasi berhasil dihapus']);

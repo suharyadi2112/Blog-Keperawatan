@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -309,16 +309,16 @@ return [
         ],
         [
             'text' => 'Dokumen',
-            'url'  => 'dokumen',
+            'url'  => '/dashboard/dokumen',
             'icon' => 'fas fa-fw fa-file',
         ],[
             'text' => 'Informasi',
-            'url'  => 'informasi',
+            'url'  => '/dashboard/informasi',
             'icon' => 'fas fa-fw fa-info',
         ],        
         [
             'text' => 'Dokumentasi',
-            'url'  => 'dokumentasi',
+            'url'  => '/dashboard/dokumentasi',
             'icon' => 'fas fa-fw fa-image',
         ],
         // [
@@ -342,7 +342,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'profile',
+            'url'  => '/dashboard/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         // [

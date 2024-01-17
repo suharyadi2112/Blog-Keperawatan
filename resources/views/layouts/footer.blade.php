@@ -4,23 +4,27 @@
     <div class="footer-top">
         <div class="container">
             <div class="row">
-               
 
-                
+
+
                 <div class="col-lg-9 col-md-6 col-12">
                     <div class="single-footer">
                         <h2>About Us</h2>
                         <p>RS pusat rujukan utama di Kepulauan Riau, diharapkan dapat memberikan pelayanan kesehatan
                             yang berkualitas didukung dengan pelayanan yang modern dari sisi sarana prasarana, prosedur
-                            pelayanan, ketersediaan tenaga.</p>
+                            pelayanan, ketersediaan tenaga.</p><br>
+                        <p><i class="fa fa-map-marker"></i> <b>Jl. WR. Supratman No.100, Air Raja, Kec. Tanjungpinang
+                                Tim., Kota Tanjung Pinang, Kepulauan
+                                Riau 29125</b></p>
                         <!-- Social -->
-                        {{-- <ul class="social">
-                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
-                            <li><a href="#"><i class="icofont-google-plus"></i></a></li>
-                            <li><a href="#"><i class="icofont-twitter"></i></a></li>
-                            <li><a href="#"><i class="icofont-vimeo"></i></a></li>
-                            <li><a href="#"><i class="icofont-pinterest"></i></a></li>
-                        </ul> --}}
+                        <ul class="social">
+                            <li><a href="https://www.instagram.com/rsudrajaahmadtabib/"><i
+                                        class="icofont-instagram"></i></a></li>
+                            <li><a href="https://www.youtube.com/@rsudrajaahmadtabib4611"><i
+                                        class="icofont-youtube"></i></a></li>
+
+                            
+                        </ul>
                         <!-- End Social -->
                     </div>
 
@@ -56,8 +60,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="copyright-content">
-                        <p>© Copyright 2023 | All Rights Reserved by <a href="#"
-                                target="_blank">Tim IT RSUD Raja Ahmad Tabib</a> </p>
+                        <p>© Copyright 2023 | All Rights Reserved by <a href="#" target="_blank">Tim IT RSUD Raja
+                                Ahmad Tabib</a> </p>
                     </div>
                 </div>
             </div>
