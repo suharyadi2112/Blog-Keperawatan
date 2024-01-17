@@ -18,9 +18,8 @@ use App\Http\Controllers\DocumentController;
 //     return view('welcome');
 // })->name('welcome');
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('welcome');
+
+Route::get('/', [App\Http\Controllers\FrontController::class, 'indexfrontend'])->name('welcome');
 
 
 
