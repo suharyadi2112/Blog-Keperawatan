@@ -7,7 +7,7 @@ use App\Models\DokumenModel;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Storage;
+use  Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
