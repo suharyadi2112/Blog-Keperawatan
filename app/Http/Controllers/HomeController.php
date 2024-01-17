@@ -29,7 +29,8 @@ class HomeController extends Controller
     {
         $user = DB::table('users')->get();
         $dokumentasi = DB::table('dokumentasis')->get();
+        $dokumen = DB::table('dokumen_models')->get();
         $informasi = DB::table('informasis')->where('deleted_at', null)->get();
-        return view('home', ['user' => $user, 'dokumentasi' => $dokumentasi, 'informasi' => $informasi]);
+        return view('home', ['user' => $user, 'dokumentasi' => $dokumentasi,'dokumen' => $dokumen, 'informasi' => $informasi]);
     }
 }

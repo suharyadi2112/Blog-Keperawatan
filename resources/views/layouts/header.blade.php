@@ -7,8 +7,8 @@
                 <div class="col-lg-6 col-md-5 col-12">
                     <!-- Contact -->
                     <ul class="top-link">
-                        <li><i class="fa fa-phone"></i>+880 1234 56789</li>
-                        <li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">support@yourmail.com</a>
+                        <li><i class="fa fa-phone"></i> +6281275812812 (Jam Kerja)</li>
+                        
                         </li>
                     </ul>
                     <!-- End Contact -->
