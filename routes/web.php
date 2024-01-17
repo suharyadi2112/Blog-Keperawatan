@@ -20,6 +20,7 @@ use App\Http\Controllers\DocumentController;
 
 
 Route::get('/', [App\Http\Controllers\FrontController::class, 'indexfrontend'])->name('welcome');
+Route::get('/dokumentasi', [App\Http\Controllers\FrontController::class, 'indexDokumentasi'])->name('frontend.dokumentasi');
 
 
 
