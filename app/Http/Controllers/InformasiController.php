@@ -66,6 +66,27 @@ class InformasiController extends Controller
 
             DB::transaction(function () use ($request) {
 
+                //validasi
+                if ($request->hasFile('file_dokumentasi')) {
+                    $request->validate([
+                        'file_dokumentasi.*' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2024',
+                    ],[
+                        'file_dokumentasi.*.image' => 'Foto dokumentasi harus berupa gambar',
+                        'file_dokumentasi.*.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg,jpg, png,gif,svg',
+                        'file_dokumentasi.*.max' => 'Foto dokumentasi maksimal berukuran 2 MB',
+                    ]);
+                };
+
+                if ($request->hasFile('file_dokumen')) {
+                    $request->validate([
+                        'file_dokumen.*'=>'mimes:xlsx,xls,csv,xlsm,docx,doc,pptx,ppt,pdf|max:2048'
+                    ],[
+                        'file_dokumen.*.max'=> 'Ukuran file terlalu besar. Disarankan maksimal 2 MB.',
+                        'file_dokumen.*.mimes'=>'Format Dokumen tidak sesuai. Disarankan : doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv'
+                    ]);
+                };
+
+                
                 //file dokumentasi -----------------
                 $uploadedFiles = [];
                 if ($request->hasFile('file_dokumentasi')) {
@@ -211,6 +232,16 @@ class InformasiController extends Controller
             
             DB::transaction(function () use ($request) {
                 if ($request->tipeFile == 'dokumentasi') {
+
+                    $request->validate([
+                        'file_dok' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2024',
+                    ],[
+                        'file_dok.required' => 'Foto dokumentasi tidak boleh kosong',
+                        'file_dok.image' => 'Foto dokumentasi harus berupa gambar',
+                        'file_dok.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg,jpg, png,gif,svg',
+                        'file_dok.max' => 'Foto dokumentasi maksimal berukuran 2 MB',
+                    ]);
+
                     if ($request->hasFile('file_dok')) {
                         if ($request->idFiless) {
                             $existingData = Dokumentasi::find($request->idFiless);
@@ -228,6 +259,14 @@ class InformasiController extends Controller
                     }
                 }else if($request->tipeFile == 'dokumen'){
 
+                    $request->validate([
+                        'file_dok'=>'mimes:xlsx,xls,csv,xlsm,docx,doc,pptx,ppt,pdf|max:2048'
+                    ],[
+                        'file_dok.required'=> 'File Harus Dipilih.',
+                        'file_dok.max'=> 'Ukuran file terlalu besar. Disarankan maksimal 2 MB.',
+                        'file_dok.mimes'=>'Format Dokumen tidak sesuai. Disarankan : doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv'
+                    ]);
+
                     if($request->hasFile('file_dok')){
                         $dokumen=DokumenModel::find($request->idFiless);
                         
@@ -244,7 +283,8 @@ class InformasiController extends Controller
             });
 
             return response()->json(['status' => 'success', 'message' => 'Dok file updated', 'data' => null], 200);
-
+        } catch (ValidationException $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->errors(), 'data' => null], 400);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
         }

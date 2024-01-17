@@ -68,11 +68,15 @@
             <div class="form-group col-6">
                 <label for="exampleInputBorderWidth2">Dokumentasi</label>
                 <input type="file" name="file_dokumentasi[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth3" multiple>
+                
+                <code>jpeg,jpg,png,gif,svg</code>
             </div>
 
             <div class="form-group col-6">
                 <label for="exampleInputBorderWidth2">Dokumen</label>
                 <input type="file" name="file_dokumen[]" id="fileDok" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth4" multiple>
+                
+                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
             </div>
 
             <div class="form-group col-12">
@@ -150,10 +154,14 @@
                     <input class="custom-control-input" type="radio" id="customRadio1" value="dokumen" name="tipeFIless">
                     <label for="customRadio1" class="custom-control-label">Dokumen</label>
                 </div>
+                
+                <code>jpeg,jpg,png,gif,svg</code>
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" id="customRadio2" value="dokumentasi" name="tipeFIless">
                     <label for="customRadio2" class="custom-control-label">Dokumentasi</label>
                 </div>
+                
+                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
             </div>
             <div class="form-group col-6">
                 <input type="hidden" name="idInformasi" id="idInformasi">
@@ -393,6 +401,9 @@
                     $('.btnUpFile').prop('disabled', false);
 		        },
 		        error: function(data,xhr) {
+                    if (data.status && data.status == 400) {
+                        alert("format file tidak sesuai")
+                    }
                     console.log(data.responseJSON)
                     console.log(data)
 		        },
