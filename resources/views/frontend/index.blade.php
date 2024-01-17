@@ -115,4 +115,8 @@
         </div>
     </section>
     <!-- End Blog Area -->
+
+    <section>
+        @include('frontend.dokumen-section')
+    </section>
 @endsection
