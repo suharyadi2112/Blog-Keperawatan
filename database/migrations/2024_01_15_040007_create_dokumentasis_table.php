@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('dokumentasis', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dokumentasi');
-            $table->string('foto_dokumentasi');
+            $table->string('foto_dokumentasi')->nullable();
+            $table->unsignedBigInteger('id_informasi')->nullable();
+            $table->foreign('id_informasi')->references('id')->on('informasis')->nullable();
             $table->timestamps();
         });
     }

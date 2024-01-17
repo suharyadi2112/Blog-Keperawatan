@@ -1,0 +1,68 @@
+<!-- Footer Area -->
+<footer id="footer" class="footer ">
+    <!-- Footer Top -->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+               
+
+                
+                <div class="col-lg-9 col-md-6 col-12">
+                    <div class="single-footer">
+                        <h2>About Us</h2>
+                        <p>RS pusat rujukan utama di Kepulauan Riau, diharapkan dapat memberikan pelayanan kesehatan
+                            yang berkualitas didukung dengan pelayanan yang modern dari sisi sarana prasarana, prosedur
+                            pelayanan, ketersediaan tenaga.</p>
+                        <!-- Social -->
+                        {{-- <ul class="social">
+                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                            <li><a href="#"><i class="icofont-google-plus"></i></a></li>
+                            <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                            <li><a href="#"><i class="icofont-vimeo"></i></a></li>
+                            <li><a href="#"><i class="icofont-pinterest"></i></a></li>
+                        </ul> --}}
+                        <!-- End Social -->
+                    </div>
+
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-footer f-link">
+                        <h2>Quick Links</h2>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6 col-12">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-caret-right"
+                                                aria-hidden="true"></i>Dokumen</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"
+                                                aria-hidden="true"></i>Informasi</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right"
+                                                aria-hidden="true"></i>Dokumentasi</a></li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Footer Top -->
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="copyright-content">
+                        <p>© Copyright 2023 | All Rights Reserved by <a href="#"
+                                target="_blank">Tim IT RSUD Raja Ahmad Tabib</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Copyright -->
+</footer>
+<!--/ End Footer Area -->

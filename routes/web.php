@@ -14,18 +14,28 @@ use App\Http\Controllers\DocumentController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.index');
+})->name('welcome');
 
-Auth::routes();
+Auth::routes(
+    [
+        'register' => true,
+        'reset' => false,
+        'verify' => false,
+    ]
+);
 
-
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dokumentasi', [App\Http\Controllers\DokumentasiController::class, 'index'])->name('dokumentasi');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/tes', [App\Http\Controllers\HomeController::class, 'tes'])->name('tes');
+Route::post('/dokumentasi', [App\Http\Controllers\DokumentasiController::class, 'store'])->name('dokumentasi.store');
+Route::get('/dokumentasi/{id}', [App\Http\Controllers\DokumentasiController::class, 'show'])->name('dokumentasi.show');
+Route::delete('/dokumentasi/{id}', [App\Http\Controllers\DokumentasiController::class, 'destroy'])->name('dokumentasi.destroy');
 
 
 // Document Route
@@ -36,8 +46,12 @@ Route::get('/informasi', [App\Http\Controllers\InformasiController::class, 'inde
 Route::post('/addInformasi', [App\Http\Controllers\InformasiController::class, 'addInformasi'])->name('addInformasi');
 Route::delete('/delInformasi/{id}', [App\Http\Controllers\InformasiController::class, 'deleteInformasi'])->name('deleteInformasi');
 Route::get('/informasi/{id}', [App\Http\Controllers\InformasiController::class, 'informasiByID'])->name('informasiByID');
+Route::get('/informasi/update/{id}', [App\Http\Controllers\InformasiController::class, 'informasiShowUpdate'])->name('informasiShowUpdate');
+Route::post('/informasi/update/proses/{id}', [App\Http\Controllers\InformasiController::class, 'upDateInformasi'])->name('upDateInformasi');
 
 
-Route::get('/profile/index', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
+
+
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'index'])->name('profile');
 Route::get('/profile/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editprofile');
 Route::post('/profile/update', [App\Http\Controllers\UserController::class, 'update'])->name('updateprofile');

@@ -24,6 +24,8 @@
                         <div class="card-header">
                             <h3 class="card-title">Daftar Dokumen</h3>
                             <div class="card-tools">
+                                {{-- <a type="button" class="btn btn-sm round btn-outline-primary shadow" title="Tambah"
+                                    label="Open Modal" data-toggle="modal" data-target="#modalAdd">Tambah</a> --}}
                                 <a href="{{ route('dokumen.create') }}" class="btn btn-block btn-primary">Tambah Data</a>
                             </div>
                         </div>
@@ -68,12 +70,17 @@
                         <p>Apakah anda yakin akan menghapus dokumen <strong id="namaDokumen"></strong></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-danger">Ya Hapus</button>
+                        <form action="" id="formHapus" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Ya Hapus</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
 
     </section>
 @endsection
@@ -91,16 +98,17 @@
     <script src="{{ asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 
-    <script>
-        $(function() {
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+
             var table = $('#tableDokumen').DataTable({
                 processing: true,
                 serverSide: true,
                 columns: [
-                    // {
-                    //     data: '',
-                    //     name: ''
-                    // },
+
                     {
                         data: 'nama',
                         name: 'Nama'
@@ -119,6 +127,18 @@
                     },
                 ]
             });
+
+
+
         });
+
+        const handleHapus = (id, nama) => {
+            console.log(nama)
+
+            var url = window.location.origin + '/dokumen/' + id;
+            $('#modalDelete').modal('show');
+            $('#namaDokumen').html(nama)
+            $('#formHapus').prop("action", url);
+        }
     </script>
 @stop
