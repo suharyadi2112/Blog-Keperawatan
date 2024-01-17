@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Models\DokumenModel;
 use App\Models\DokumenModel as ModelsDokumenModel;
 
+
+use Illuminate\Support\Facades\DB;
+use App\Models\Informasi;
+
 class FrontController extends Controller
 {
 
