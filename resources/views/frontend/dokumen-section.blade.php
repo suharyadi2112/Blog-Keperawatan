@@ -27,10 +27,10 @@
                                     {{ $dokumen->deskripsi }}
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm round btn-outline-primary shadow mr-2">
+                                    <a href="{{ 'storage/'. $dokumen->file}}"  class="btn btn-sm round btn-outline-primary text-light shadow mr-2">
                                         <i class="fa fas fa-search"></i>
 
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @empty

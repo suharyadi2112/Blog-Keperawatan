@@ -30,6 +30,9 @@ class FrontController extends Controller
     }
 
     public function indexDokumen(){
-        return view('frontend.dokumen');
+        $dokumens=ModelsDokumenModel::orderby('created_at','desc')->get();
+        return view('frontend.dokumen')->with('dokumens',$dokumens);;
     }
+
+    
 }
