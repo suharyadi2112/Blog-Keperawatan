@@ -19,7 +19,8 @@ class FrontController extends Controller
         return view('frontend.index',)->with('dokumens',$dokumens)->with('informasi',$informasi);
     }
     public function indexDokumentasi(){
-        return view('frontend.dokumentasi');
+        $dokumentasis=Dokumentasi::orderby('created_at','desc')->paginate(12);
+        return view('frontend.dokumentasi')->with('dokumentasis',$dokumentasis);
     }
 
     public function indexDokumen(){
@@ -33,7 +34,7 @@ class FrontController extends Controller
  
         return view('frontend.dokumen-detail')->with('dokumen',$dokumen);
     }
-    
+
     public function indexInformasi(){
         return view('frontend.informasi');
     }

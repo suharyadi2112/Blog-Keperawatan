@@ -58,7 +58,7 @@ class DokumentasiController extends Controller
             'foto_dokumentasi.required' => 'Foto dokumentasi tidak boleh kosong',
             'foto_dokumentasi.image' => 'Foto dokumentasi harus berupa gambar',
             'foto_dokumentasi.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg, png, jpg, gif, svg',
-            'foto_dokumentasi.max' => 'Foto dokumentasi maksimal berukuran 2 MB',
+            'foto_dokumentasi.max' => 'Foto dokumentasi maksimal berukuran 1 MB',
         ]);
     
 
