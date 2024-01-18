@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Dokumentasi')
 @section('content')
 <section class="blog grid section" id="blog">
     <div class="container">
@@ -40,6 +41,6 @@
 </section>
 @endsection
 @push('styles')
-<link rel="stylesheet" href="vendor/lightbox/lightbox.css">
-<script defer="" src="vendor/lightbox/lightbox.js"></script>
+<link rel="stylesheet" href="{{ asset('vendor/lightbox/lightbox.css') }}">
+<script defer="" src="{{ asset('vendor/lightbox/lightbox.js') }}"></script>
 @endpush

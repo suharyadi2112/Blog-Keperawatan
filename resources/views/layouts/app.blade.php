@@ -7,10 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>RSUD Raja Ahmad Tabib</title>
+    <title>RSUD Raja Ahmad Tabib - @yield('title')</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="assets/img/kepri.png">
+    <link rel="icon" href="{{ asset('assets/img/kepri.png') }}">
 		
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">

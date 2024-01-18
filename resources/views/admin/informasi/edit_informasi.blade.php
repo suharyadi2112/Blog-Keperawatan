@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Edit Informasi')
 
 @section('content_header')
     <h3 >Edit Informasi</h3>

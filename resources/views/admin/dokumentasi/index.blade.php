@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dokumentasi')
+@section('title', 'Dashboard - Dokumentasi')
 
 @section('content_header')
     <h1>Dokumentasi</h1>
