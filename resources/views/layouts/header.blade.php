@@ -8,8 +8,6 @@
                     <!-- Contact -->
                     <ul class="top-link">
                         <li><i class="fa fa-phone"></i> +6281275812812 (Jam Kerja)</li>
-                        
-                        </li>
                     </ul>
                     <!-- End Contact -->
                 </div>
