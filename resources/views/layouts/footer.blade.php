@@ -14,13 +14,13 @@
                             yang berkualitas didukung dengan pelayanan yang modern dari sisi sarana prasarana, prosedur
                             pelayanan, ketersediaan tenaga.</p><br>
                         <p><i class="fa fa-map-marker"></i> <b>Jl. WR. Supratman No.100, Air Raja, Kec. Tanjungpinang
-                                Tim., Kota Tanjung Pinang, Kepulauan
+                                Timur, Kota Tanjungpinang, Kepulauan
                                 Riau 29125</b></p>
                         <!-- Social -->
                         <ul class="social">
-                            <li><a href="https://www.instagram.com/rsudrajaahmadtabib/"><i
+                            <li><a href="https://www.instagram.com/rsudrajaahmadtabib/" target="_blank"><i
                                         class="icofont-instagram"></i></a></li>
-                            <li><a href="https://www.youtube.com/@rsudrajaahmadtabib4611"><i
+                            <li><a href="https://www.youtube.com/@rsudrajaahmadtabib4611" target="_blank"><i
                                         class="icofont-youtube"></i></a></li>
 
 
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="copyright-content">
-                        <p>© Copyright 2023 | All Rights Reserved by <a href="#" target="_blank">Tim IT RSUD Raja
+                        <p>© Copyright 2023 | All Rights Reserved by <a href="#" >Tim IT RSUD Raja
                                 Ahmad Tabib</a> </p>
                     </div>
                 </div>

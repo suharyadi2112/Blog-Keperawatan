@@ -1,7 +1,25 @@
 @extends('layouts.app')
 @section('title', 'Dokumen')
 @section('content')
-    <section class="blog section" id="blog">
+    <section class="blog grid section" id="blog" style="padding-top: 0px;">
+        <div class="breadcrumbs overlay"
+            style="background-image: url('https://fastly.picsum.photos/id/190/1600/330.jpg?hmac=-GhevoFoOoiC969cghjv_JCXSbTo3FO96l7jfuPjmwI');">
+            <div class="container">
+                <div class="bread-inner">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Dokumen</h2>
+                            <ul class="bread-list">
+                                <li><a href="{{route('welcome')}}">Home</a></li>
+                                <li><i class="icofont-simple-right"></i></li>
+                                <li class="active">Dokumen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -38,4 +56,11 @@
             </div>
         </div>
     </section>
+    <style scoped>
+        .breadcrumbs.overlay {
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+    </style>
 @endsection
