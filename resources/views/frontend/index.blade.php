@@ -49,7 +49,7 @@
                             <!-- Single Blog -->
                             <div class="single-news">
                                 <div class="news-head">
-                                        <img src="https://via.placeholder.com/560x370" alt="#">
+                                        <img src="{{ asset('storage/thumbnail/' . $informasi->thumbnail) }}" alt="#">
                                 </div>
                                 <div class="news-body">
                                     <div class="news-content">
