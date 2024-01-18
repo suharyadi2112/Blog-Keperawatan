@@ -2,33 +2,19 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <!-- Slider Area -->
     <section class="slider">
         <div class="hero-slider">
-            <!-- Start Single Slider -->
             <div class="single-slider" style="background-image:url('assets/img/rsup.png')">
-
             </div>
-            <!-- End Single Slider -->
-            <!-- Start Single Slider -->
             <div class="single-slider" style="background-image:url('assets/img/rsup.png')">
-
             </div>
-            <!-- Start End Slider -->
-            <!-- Start Single Slider -->
-
-            <!-- End Single Slider -->
         </div>
     </section>
-    <!--/ End Slider Area -->
-
-    <!-- Start Schedule Area -->
     <section class="schedule">
         <div class="container">
             <div class="schedule-inner">
                 <div class="row">
-                    <div class="col-lg-12 col-md-6 col-12 ">
-                        <!-- single-schedule -->
+                    <div class="col-12">
                         <div class="single-schedule first">
                             <div class="inner">
                                 <div class="icon">
@@ -48,9 +34,6 @@
             </div>
         </div>
     </section>
-    <!--/End Start schedule Area -->
-
-    <!-- Start Blog Area -->
     <section class="blog section" id="blog">
         <div class="container">
             <div class="row">
@@ -62,7 +45,6 @@
             </div>
             <div class="row">
                 @foreach ($informasi as $informasi)
-                   
                         <div class="col-lg-4 col-md-6 col-12">
                             <!-- Single Blog -->
                             <div class="single-news">
@@ -78,17 +60,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Single Blog -->
                         </div>
-                    
                 @endforeach
-
             </div>
         </div>
     </section>
-    <!-- End Blog Area -->
-
     <section>
         @include('frontend.dokumen-section')
     </section>
 @endsection
+
+@push('styles')
+<style>
+    .slider .single-slider:before{
+        background:transparent;
+    }
+</style>
+@endpush

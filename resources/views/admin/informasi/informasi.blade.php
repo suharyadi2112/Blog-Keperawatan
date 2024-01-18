@@ -210,7 +210,7 @@
 
                                 dokumentasiHtml += '<div class="btn-group"><button type="button" class="btn btn-outline-danger shadow-sm delFile btn-sm pb-1 mb-1" data-tipe="dokumentasi"  data-id="'+data.dokumentasis[i].id+'"><i class="fa fa-solid fa-trash"></i></button>'+
 
-                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumentasi"  data-id="'+data.dokumentasis[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+ data.dokumentasis[i].foto_dokumentasi+'</button></a><br>';
+                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumentasi"  data-id="'+data.dokumentasis[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-image"></i></button></a><br>';
                             }
                         } else {
                             dokumentasiHtml = 'No Dokumentasis';
@@ -229,7 +229,7 @@
 
                                 dokumen += '<div class="btn-group"><button type="button" class="btn btn-outline-danger shadow-sm delFile btn-sm pb-1 mb-1" data-tipe="dokumen"  data-id="'+data.dokumen[i].id+'"><i class="fa fa-solid fa-trash"></i></button>'+
 
-                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumen"  data-id="'+data.dokumen[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i> '+namaDokumenFix+'</button></a><br>';
+                                '<button type="button" class="btn btn-outline-info shadow-sm upFile btn-sm pb-1 mb-1" data-tipe="dokumen"  data-id="'+data.dokumen[i].id+'"><i class="fa fa-solid fa-pencil-alt"></i></button></div> <a href="' + link + '" target="_blank"><button type="button" class="btn btn-sm round btn-outline-primary shadow-sm pb-1 mb-1" ><i class="fa fa-solid fa-file"></i></button></a><br>';
                             }
                         } else {
                             dokumen = 'No Dokumen';

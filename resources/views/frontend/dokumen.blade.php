@@ -3,7 +3,7 @@
 @section('content')
     <section class="blog grid section" id="blog" style="padding-top: 0px;">
         <div class="breadcrumbs overlay"
-            style="background-image: url('https://fastly.picsum.photos/id/190/1600/330.jpg?hmac=-GhevoFoOoiC969cghjv_JCXSbTo3FO96l7jfuPjmwI');">
+            style="background-image: url('{{ asset('assets/img/rsup.png') }}');">
             <div class="container">
                 <div class="bread-inner">
                     <div class="row">
