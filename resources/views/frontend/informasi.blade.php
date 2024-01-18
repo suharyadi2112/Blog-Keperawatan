@@ -27,7 +27,7 @@
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="single-news">
                     <div class="news-head lightbox">
-                        <img src="https://via.placeholder.com/560x370" alt="#" style="width: 100%; height: 200px; object-fit: cover;">
+                        <img src="{{ asset('storage/thumbnail/' . $informasi->thumbnail) }}" alt="#" style="width: 100%; height: 200px; object-fit: cover;">
                     </div>
                     <div class="news-body">
                         <div class="news-content">
@@ -48,7 +48,7 @@
             </div>
             @else
             <div class="col-12 d-flex justify-content-center">
-                <p>Saat ini belum ada dokumentasi</p>
+                <p>Saat ini belum ada informasi</p>
             </div>
             @endif
         </div>

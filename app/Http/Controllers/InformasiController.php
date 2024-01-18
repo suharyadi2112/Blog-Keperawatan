@@ -85,6 +85,15 @@ class InformasiController extends Controller
                         'file_dokumen.*.mimes'=>'Format Dokumen tidak sesuai. Disarankan : doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv'
                     ]);
                 };
+                
+                if ($request->hasFile('thumbnail')) {
+                    $request->validate([
+                        'thumbnail'=>'mimes:jpeg,jpg,png|max:2048'
+                    ],[
+                        'thumbnail.max'=> 'Ukuran file terlalu besar. Disarankan maksimal 2 MB.',
+                        'thumbnail.mimes'=>'Format Dokumen tidak sesuai. Disarankan : jpeg,jpg,png'
+                    ]);
+                };
 
                 
                 //file dokumentasi -----------------
@@ -132,12 +141,21 @@ class InformasiController extends Controller
                 foreach ($uploadedFilesDokumen as $fileDokumen) {
                     $dokumenIds[] = DokumenModel::create($fileDokumen)->id;
                 }
+
+                //file thumbnail --------------------------------
+                $namethumbNail = null;
+                if ($request->hasFile('thumbnail')) {
+                    $fileThumbnail = $request->file('thumbnail');
+                    $namethumbNail=Str::slug($file->getClientOriginalName()).'-'.time().'.'.$fileThumbnail->extension();
+                    $path =  $fileThumbnail->storeAs('thumbnail', $namethumbNail, 'public');
+                }
                 
                 //-- Transaksi ----------------------------------
                 $informasi = Informasi::create([
                     'id_user' => $request->id_user,
                     'judul_informasi' => $request->input('judul_informasi'),
                     'isi_informasi' => $request->input('isi_informasi'),
+                    'thumbnail' => $namethumbNail,
                 ]);
                 Dokumentasi::whereIn('id', $dokumentasiIds)->update(['id_informasi' => $informasi->id]);
                 DokumenModel::whereIn('id', $dokumenIds)->update(['id_informasi' => $informasi->id]);

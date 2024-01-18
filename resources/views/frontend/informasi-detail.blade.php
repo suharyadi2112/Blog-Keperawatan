@@ -27,10 +27,11 @@
                 <div class="col-12">
                     <div class="single-main">
                         <div class="news-head">
-                            <img src="https://dummyimage.com/640x4:3/" alt="#">
+                            @foreach($informasi as $infoThumnail)
+                            <img src="{{ asset('storage/thumbnail/' . $infoThumnail->thumbnail) }}" alt="#" style="object-fit: cover;">
+                            @endforeach
                         </div>
                         <h1 class="news-title" id="juduL"></h1>
-
                         <div class="meta">
                             <div class="meta-left">
                             <span class="author"><img src="https://dummyimage.com/640x4:3/" alt="#"><font id="namaUser"></font></span>
@@ -61,7 +62,9 @@
                     <div class="single-post">
                         
                         <div class="image">
-                        <img src="https://dummyimage.com/640x4:3/" alt="#">
+                            @foreach($informasi as $infoThumnail)
+                            <img src="{{ asset('storage/thumbnail/' . $infoThumnail->thumbnail) }}" alt="#" style="object-fit: cover;">
+                            @endforeach
                         </div>
                         <div class="content">
                         <h5>
@@ -172,8 +175,6 @@
             namaUser.append(data[i].user.name);
             created.append(ChangeDate(data[i].created_at));   
             isiInformasi.append(data[i].isi_informasi); 
-
-        
         }
     }
 

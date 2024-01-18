@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('judul_informasi');
             $table->longText('isi_informasi');
+            $table->string('thumbnail')->nullable();
             $table->softDeletes();
         });
     }

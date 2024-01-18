@@ -29,6 +29,7 @@
                             <th>Action</th>
                             <th>Judul Informasi</th>
                             <th>Isi Informasi</th>
+                            <th>Thumbnail</th>
                             <th>Dokumentasi</th>
                             <th>Dokumen</th>
                         </tr>
@@ -60,9 +61,16 @@
         <form method="POST" id="addInfomasiForm" data-route="{{ route('addInformasi') }}" enctype="multipart/form-data">
         <div class="modal-body row">
             <div id="alertInfo" class="col-12"> </div>
-            <div class="form-group col-12">
+            <div class="form-group col-6">
                 <label for="exampleInputBorderWidth2">Judul Informasi</label>
                 <input type="text" name="judul_informasi" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
+            </div>
+
+            <div class="form-group col-6">
+                <label for="exampleInputBorderWidththumbnail">Thumbnail</label>
+                <input type="file" name="thumbnail" id="thumbnail" class="form-control form-control-border border-width-2" id="exampleInputBorderWidththumbnail">
+                
+                <code>jpeg,jpg,png</code>
             </div>
 
             <div class="form-group col-6">
@@ -201,6 +209,12 @@
 	            		return '<a href="informasi/'+data.id+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow-sm"><i class="fa fa-solid fa-eye"></i> Detail Informasi</button></a>';
                     }
                 },
+                {data: 'thumbnail', name: 'thumbnail',
+                    render: function(type, row, data){
+                        let linkThumbnail = '{{ asset("storage/thumbnail/") }}' + '/' + data.thumbnail;
+	            		return '<a href="'+linkThumbnail+'" target="_blank"><button type="button" class="btn btn-outline-primary btn-sm shadow-sm"><i class="fa fa-solid fa-image"></i> </button></a>';
+                    }
+                },
                 {data: 'dokumentasis',
                     render: function(type, row, data) {
                         let dokumentasiHtml = '';
@@ -239,12 +253,20 @@
                 },
             ],
             createdRow:function(row,data,index){
-		    	$('td',row).eq(3).attr("nowrap","nowrap");
 		    	$('td',row).eq(0).css("vertical-align","middle");
 		    	$('td',row).eq(1).css("vertical-align","middle");
 		    	$('td',row).eq(2).css("vertical-align","middle");
-		    	$('td',row).eq(2).css("text-align","left");
-			}
+		    	$('td',row).eq(3).css("vertical-align","middle");
+		    	$('td',row).eq(4).css("vertical-align","middle");
+		    	$('td',row).eq(5).css("vertical-align","middle");
+
+                
+		    	$('td',row).eq(0).attr("nowrap","nowrap");
+		    	$('td',row).eq(4).attr("nowrap","nowrap");
+		    	$('td',row).eq(5).attr("nowrap","nowrap");
+		    	$('td',row).eq(1).css("text-align","left");
+		    	$('td',row).eq(2).css("text-align","center");
+		    	$('td',row).eq(3).css("text-align","center");			}
         });
 
         //del file spesific
