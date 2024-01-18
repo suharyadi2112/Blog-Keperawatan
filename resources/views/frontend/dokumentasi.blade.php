@@ -21,13 +21,6 @@
         </div><br>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Dokumentasi</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 @if (count($dokumentasis) > 0)
                     @foreach ($dokumentasis as $dokumentasi)
                         <div class="col-lg-4 col-md-6 col-12">
