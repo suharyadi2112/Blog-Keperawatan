@@ -28,7 +28,7 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ 'storage/' . $dokumen->file }}"
-                                        class="btn btn-sm round btn-outline-primary text-light shadow mr-2"><i
+                                        class="btn btn-sm round btn-outline-primary text-light shadow mr-2"  target="_blank"><i
                                             class="fa fas fa-search"></i></a>
 
                                 </td>
