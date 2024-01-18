@@ -27,7 +27,7 @@
                                     @error('namaDokumen')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" id="namaDokumen" name="namaDokumen"
+                                    <input type="text" class="form-control form-control-border border-width-2" id="namaDokumen" name="namaDokumen"
                                         placeholder="Nama Dokumen" value="{{ old('namaDokumen') }}">
                                 </div>
                                 <div class="form-group">
@@ -35,20 +35,14 @@
                                     @error('deskripsi')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi"> {{ old('deskripsi') }}</textarea>
+                                    <textarea class="form-control form-control-border border-width-2" id="deskripsi" name="deskripsi" placeholder="Deskripsi"> {{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File</label>
                                     @error('file')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                name="file">
-                                            <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
-                                        </div>
-                                    </div>
+                                    <input type="file" name="file" id="file" class="form-control form-control-border border-width-2" required>
                                 </div>
                             </div>
                             <div class="card-footer ">

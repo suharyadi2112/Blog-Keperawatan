@@ -122,8 +122,8 @@
 
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btnUpFile">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary btnUpFile">Simpan</button>
         </div>
         </form>
       </div>
@@ -171,8 +171,8 @@
 
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary btnAddFile">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-primary btnAddFile">Simpan</button>
         </div>
         </form>
       </div>

@@ -28,7 +28,7 @@
                                     @error('nama')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <input type="text" class="form-control" id="nama" name="nama"
+                                    <input type="text" class="form-control form-control-border border-width-2" id="nama" name="nama"
                                         placeholder="Nama Dokumen" value="{{ old('nama') ? old('nama') : $dokumen->nama }}">
                                 </div>
                                 <div class="form-group">
@@ -36,7 +36,7 @@
                                     @error('deskripsi')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi"> {{ old('deskripsi') ? old('deskripsi') : $dokumen->deskripsi }}</textarea>
+                                    <textarea class="form-control form-control-border border-width-2" id="deskripsi" name="deskripsi" placeholder="Deskripsi"> {{ old('deskripsi') ? old('deskripsi') : $dokumen->deskripsi }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File</label>
@@ -45,13 +45,7 @@
                                     @enderror
                                     <br /> <small class="text-primary"><i
                                             class="fas fa-file mr-1"></i>{{ str_replace('dokumen/', '', $dokumen->file) }}</small>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                name="file">
-                                            <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
-                                        </div>
-                                    </div>
+                                    <input type="file" name="file" id="file" class="form-control form-control-border border-width-2">
                                 </div>
                             </div>
                             <div class="card-footer ">

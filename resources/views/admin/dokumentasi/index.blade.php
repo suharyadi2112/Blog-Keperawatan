@@ -49,18 +49,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_dokumentasi">Nama Dokumentasi</label>
-                            <input type="text" class="form-control" id="nama_dokumentasi" name="nama_dokumentasi"
-                                placeholder="Nama Dokumentasi" required>
+                            <input type="text" name="nama_dokumentasi" id="nama_dokumentasi" class="form-control form-control-border border-width-2" placeholder="Nama Dokumentasi" required>
                         </div>
                         <div class="form-group">
                             <label for="foto_dokumentasi">File Dokumentasi</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="foto_dokumentasi"
-                                        name="foto_dokumentasi" accept="image/*">
-                                    <label class="custom-file-label" for="foto_dokumentasi">Choose file</label>
-                                </div>
-                            </div>
+                            <input type="file" name="foto_dokumentasi" id="foto_dokumentasi" class="form-control form-control-border border-width-2" required>
                         </div>
                     </div>
                     <div class="modal-footer">
