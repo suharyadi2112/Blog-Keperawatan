@@ -381,7 +381,7 @@ class InformasiController extends Controller
             $validator = Validator::make($request->all(), [
                 'id_user' => 'required|max:12',
                 'judul_informasi' => 'required|string|max:100',
-                'isi_informasi' => 'required|nullable|string|max:10000',
+                'isi_informasi' => 'required|nullable|string',
             ]);
         }
         return $validator;
