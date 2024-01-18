@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Informasi')
 @section('content')
 
 <section class="blog grid section" id="blog" style="padding-top: 0px;">
@@ -10,7 +10,7 @@
                     <div class="col-12">
                         <h2>Informasi</h2>
                         <ul class="bread-list">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{route('welcome')}}">Home</a></li>
                         <li><i class="icofont-simple-right"></i></li>
                         <li class="active">Informasi</li>
                         </ul>
