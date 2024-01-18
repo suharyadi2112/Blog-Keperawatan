@@ -14,21 +14,15 @@ use App\Http\Controllers\DocumentController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-
-
 Route::get('/', [App\Http\Controllers\FrontController::class, 'indexfrontend'])->name('welcome');
 Route::get('/dokumentasi', [App\Http\Controllers\FrontController::class, 'indexDokumentasi'])->name('frontend.dokumentasi');
 Route::get('/dokumen', [App\Http\Controllers\FrontController::class, 'indexDokumen'])->name('frontend.dokumen');
 Route::get('/informasi', [App\Http\Controllers\FrontController::class, 'indexInformasi'])->name('frontend.informasi');
-Route::get('/dokumen', [App\Http\Controllers\FrontController::class, 'indexDokumen'])->name('frontend.dokumen');
 Route::get('/detail/{id}', [App\Http\Controllers\FrontController::class, 'detailInformasi'])->name('informasiDetail');
 
 Auth::routes(
     [
-        'register' => true,
+        'register' => false,
         'reset' => false,
         'verify' => false,
     ]

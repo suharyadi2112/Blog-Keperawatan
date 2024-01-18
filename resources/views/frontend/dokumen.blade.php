@@ -23,13 +23,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="table">
                         <thead>
                             <tr>
                                 <th width="30px"class="text-center">No</th>
                                 <th> Dokumen</th>
 
-                                <th class="text-center">Detail</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,8 +41,7 @@
                                         {{ $dokumen->deskripsi }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ 'storage/' . $dokumen->file }}"
-                                            class="btn btn-sm round btn-outline-primary text-light shadow mr-2">
+                                        <a href="{{ 'storage/' . $dokumen->file }}" class="btn btn-sm round btn-outline-primary text-light shadow mr-2">
                                             <i class="fa fas fa-search"></i>
 
                                         </a>
@@ -53,14 +52,24 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="col-lg-12">
+                    <div class="float-right">
+                        <div class="pagination">
+                            {!! $dokumens->links() !!}
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
     </section>
-    <style scoped>
-        .breadcrumbs.overlay {
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-        }
-    </style>
 @endsection
+
+@push('styles')
+    <style scoped>
+    .breadcrumbs.overlay {
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    </style>
+@endpush

@@ -8,6 +8,7 @@ use App\Models\DokumenModel as ModelsDokumenModel;
 use App\Models\Informasi;
 use App\Models\Dokumentasi;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Datatables;
 
 class FrontController extends Controller
 {
@@ -24,15 +25,8 @@ class FrontController extends Controller
     }
 
     public function indexDokumen(){
-        $dokumens=ModelsDokumenModel::orderby('created_at','desc')->get();
+        $dokumens=ModelsDokumenModel::orderby('created_at','desc')->paginate(15);
         return view('frontend.dokumen')->with('dokumens',$dokumens);;
-    }
-
-    public function dokumenDetail($id){
-        $dokumen=DokumenModel::find($id);
-        if(!$dokumen) return redirect(route('welcome'));
- 
-        return view('frontend.dokumen-detail')->with('dokumen',$dokumen);
     }
 
     public function indexInformasi(){

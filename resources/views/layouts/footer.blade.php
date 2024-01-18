@@ -3,11 +3,8 @@
     <!-- Footer Top -->
     <div class="footer-top">
         <div class="container">
-            <div class="row">
-
-
-
-                <div class="col-lg-9 col-md-6 col-12">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-md-6 col-12">
                     <div class="single-footer">
                         <h2>About Us</h2>
                         <p>RS pusat rujukan utama di Kepulauan Riau, diharapkan dapat memberikan pelayanan kesehatan
@@ -22,12 +19,9 @@
                                         class="icofont-instagram"></i></a></li>
                             <li><a href="https://www.youtube.com/@rsudrajaahmadtabib4611" target="_blank"><i
                                         class="icofont-youtube"></i></a></li>
-
-
                         </ul>
                         <!-- End Social -->
                     </div>
-
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="single-footer f-link">
@@ -44,10 +38,8 @@
                                                 aria-hidden="true"></i>Informasi</a></li>
                                     <li><a href="{{ route('frontend.dokumentasi') }}"><i class="fa fa-caret-right"
                                                 aria-hidden="true"></i>Dokumentasi</a></li>
-
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -39,18 +39,18 @@
     <div class="header-inner">
         <div class="container">
             <div class="inner">
-                <div class="row ">
+                <div class="row d-flex justify-content-between">
                     <div class="col-lg-3 col-md-3 col-12">
                         <!-- Start Logo -->
                         <div class="logo mb-3">
-                            <a href="{{ route('welcome') }}"><img src="assets/img/rsud.jpg" alt="#"></a>
+                            <a href="{{ route('welcome') }}"><img src="assets/img/rsud.jpg" width="160" height="50" alt="logo"></a>
                         </div>
                         <!-- End Logo -->
                         <!-- Mobile Nav -->
                         <div class="mobile-nav"></div>
                         <!-- End Mobile Nav -->
                     </div>
-                    <div class="col-lg-7 col-md-9 col-12">
+                    <div class="col-lg-5 col-md-7 col-12">
                         <!-- Main Menu -->
                         <div class="main-menu">
                             <nav class="navigation">
