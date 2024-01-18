@@ -1,6 +1,6 @@
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <!-- Nice Select CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <!-- Font Awesome CSS -->
@@ -21,7 +21,7 @@
     <!-- Medipro CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     
     <!-- Color CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/color/color1.css') }}">

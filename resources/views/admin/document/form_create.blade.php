@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'RSUD Raja Ahmad Tabib - Buat Dokumen')
+@section('title', 'Dashboard - Buat Dokumen')
 
 @section('content_header')
     <h1>Dokumen</h1>
