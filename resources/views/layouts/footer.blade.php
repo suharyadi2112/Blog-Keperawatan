@@ -23,7 +23,7 @@
                             <li><a href="https://www.youtube.com/@rsudrajaahmadtabib4611"><i
                                         class="icofont-youtube"></i></a></li>
 
-                            
+
                         </ul>
                         <!-- End Social -->
                     </div>
@@ -35,13 +35,14 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-6 col-12">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a>
+                                    <li><a href="{{ route('welcome') }}"><i class="fa fa-caret-right"
+                                                aria-hidden="true"></i>Home</a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-caret-right"
+                                    <li><a href="{{ route('frontend.dokumen') }}"><i class="fa fa-caret-right"
                                                 aria-hidden="true"></i>Dokumen</a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right"
+                                    <li><a href="{{ route('frontend.informasi') }}"><i class="fa fa-caret-right"
                                                 aria-hidden="true"></i>Informasi</a></li>
-                                    <li><a href="#"><i class="fa fa-caret-right"
+                                    <li><a href="{{ route('frontend.dokumentasi') }}"><i class="fa fa-caret-right"
                                                 aria-hidden="true"></i>Dokumentasi</a></li>
 
                                 </ul>
