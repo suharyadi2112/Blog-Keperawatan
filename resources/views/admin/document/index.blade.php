@@ -20,23 +20,19 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Daftar Dokumen</h3>
                             <div class="card-tools">
-                                {{-- <a type="button" class="btn btn-sm round btn-outline-primary shadow" title="Tambah"
-                                    label="Open Modal" data-toggle="modal" data-target="#modalAdd">Tambah</a> --}}
                                 <a href="{{ route('dokumen.create') }}" class="btn btn-block btn-primary">Tambah Data</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-
-                            <table class="table table-bordered" id="tableDokumen">
+                        <div class="card-body table-responsive">
+                            <table class="table table-bordered" id="tableDokumen" width="100%">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="width: 10px">#</th> --}}
                                         <th>Nama Dokumen</th>
                                         <th>Deskripsi</th>
                                         <th>Tanggal</th>

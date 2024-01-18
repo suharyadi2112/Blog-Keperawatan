@@ -32,8 +32,6 @@
 <script src="{{ asset('assets/js/wow.min.js') }}"></script>
 <!-- Magnific Popup JS -->
 <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-<!-- Counter Up CDN JS -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <!-- Main JS -->

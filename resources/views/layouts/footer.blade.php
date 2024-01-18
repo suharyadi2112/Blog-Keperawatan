@@ -6,7 +6,7 @@
             <div class="row justify-content-between">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="single-footer">
-                        <h2>About Us</h2>
+                        <h2>Tentang</h2>
                         <p>RS pusat rujukan utama di Kepulauan Riau, diharapkan dapat memberikan pelayanan kesehatan
                             yang berkualitas didukung dengan pelayanan yang modern dari sisi sarana prasarana, prosedur
                             pelayanan, ketersediaan tenaga.</p><br>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="single-footer f-link">
-                        <h2>Quick Links</h2>
+                        <h2>Tautan</h2>
                         <div class="row">
                             <div class="col-lg-12 col-md-6 col-12">
                                 <ul>
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="copyright-content">
-                        <p>© Copyright 2023 | All Rights Reserved by <a href="#" >Tim IT RSUD Raja
+                        <p>© Copyright 2024 | All Rights Reserved by <a href="#" >Tim IT RSUD Raja
                                 Ahmad Tabib</a> </p>
                     </div>
                 </div>
