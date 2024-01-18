@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            @error('email')
+            @error('username')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -63,7 +63,7 @@
         {{-- Login field --}}
         <div class="row">
             <div class="col-7">
-                <a href="{{ route('welcome') }}" class="btn btn-outline-primary">
+                <a href="{{ route('welcome') }}" class="btn btn-outline-success">
                     <span class="fas fa-home"></span>
                 </a>
             </div>

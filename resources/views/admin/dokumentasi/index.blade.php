@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dokumentasi')
+@section('title', 'Dashboard - Dokumentasi')
 
 @section('content_header')
     <h1>Dokumentasi</h1>
@@ -110,16 +110,14 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 @stop
 
 @section('js')
     <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $(function() {
             var Toast = Swal.mixin({
@@ -298,13 +296,10 @@
                 })     
             });
 
-
             $('#closeImage').click(function () { 
                 $('.modal-body img').remove();
                 clearForm();
             });
-
-
         });
     </script>
 @stop

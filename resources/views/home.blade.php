@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - RSUD Raja Ahmad Tabib')
 
 @section('content_header')
     <h1>Dashboard</h1>
@@ -61,14 +61,4 @@
         </div>
 
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-        console.log('Hi!');
-    </script>
 @stop

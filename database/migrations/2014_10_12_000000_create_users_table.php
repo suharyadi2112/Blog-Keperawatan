@@ -15,11 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->string('ID_Dokumentasi')->nullable();
-            $table->string('ID_Dokumen')->nullable();
-            $table->string('ID_Informasi')->nullable();
-            // // $table->string('email')->unique();
-            // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Edit Profile')
 
 @section('content_header')
     <h1>Edit User</h1>
@@ -57,14 +57,4 @@
         </div><!-- /.container-fluid -->
     </section>
 
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script>
-        console.log('Hi!');
-    </script>
 @stop

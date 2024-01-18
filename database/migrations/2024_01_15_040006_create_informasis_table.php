@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
             $table->string('judul_informasi');
-            $table->text('isi_informasi');
+            $table->longText('isi_informasi');
             $table->softDeletes();
         });
     }
