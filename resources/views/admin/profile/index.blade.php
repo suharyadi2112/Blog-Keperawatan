@@ -20,8 +20,8 @@
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
-                                    <tr>
-                                        <th style="width: 10px">No.</th>
+                                    <tr align="center">
+
                                         <th>Nama User</th>
                                         <th>Username</th>
                                         <th style="width: 40px">Action</th>
@@ -29,17 +29,20 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($user as $m)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$m->name}}</td>
-                                        <td>{{$m->username}}</td>
-                                        <td><a href="{{route('editprofile',$m->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-                                    </tr>
+                                        @if (Auth::user()->name == $m->name)
+                                            <tr align="center">
+                                                <td>{{ $m->name }}</td>
+                                                <td>{{ $m->username }}</td>
+                                                <td><a href="{{ route('editprofile', $m->id) }}" class="btn btn-primary"><i
+                                                            class="fas fa-edit"></i></a></td>
+                                            </tr>
+                                        @else
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                     <!-- /.card -->
                 </div>

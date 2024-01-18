@@ -36,6 +36,16 @@ class FrontController extends Controller
     }
 
     public function indexInformasi(){
-        return view('frontend.informasi');
+
+        $informasi=Informasi::with('dokumentasis', 'dokumen')->orderby('created_at','desc')->paginate(6);
+
+        return view('frontend.informasi', ['informasi' => $informasi])->with('informasis',$informasi);
+    }
+
+    public function detailInformasi($id){
+
+        // $informasi=Informasi::with('dokumentasis', 'dokumen')->orderby('created_at','desc')->where('id','=',)->get();
+
+        // return view('frontend.informasi-detail', ['informasi' => $informasi]);
     }
 }

@@ -73,8 +73,8 @@
                                     <div class="news-content">
                                         <div class="date">
                                             {{ \Carbon\Carbon::parse($informasi->created_at)->format('d M Y') }}</div>
-                                        <h2><a href="blog-single.html">{{ $informasi->isi_informasi }}</a></h2>
-                                        <p class="text">{!! nl2br($informasi->isi_informasi) !!}</p>
+                                        <h2><a href="{{ Route("informasiDetail", ['id' => $informasi->id]) }}" target="_blank">{!! $informasi->judul_informasi !!}</a></h2>
+                                        <p class="text">{!! substr(strip_tags($informasi->isi_informasi), 0, 300) !!}...</p>
                                     </div>
                                 </div>
                             </div>
