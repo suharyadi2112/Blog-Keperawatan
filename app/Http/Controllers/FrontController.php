@@ -36,10 +36,15 @@ class FrontController extends Controller
         return view('frontend.informasi', ['informasi' => $informasi])->with('informasis',$informasi);
     }
 
-    public function detailInformasi($id){
+    public function detailInformasi(Request $request){
 
-        // $informasi=Informasi::with('dokumentasis', 'dokumen')->orderby('created_at','desc')->where('id','=',)->get();
+        $informasi=Informasi::with('dokumentasis', 'dokumen', 'user')->orderby('created_at','desc')->where('id','=',$request->id)->get();
+        $latestInformasi = Informasi::find($request->id)->orderBy('created_at', 'desc')->take(3)->get();
 
-        // return view('frontend.informasi-detail', ['informasi' => $informasi]);
+        if ($request->ajax()) {
+            return response()->json($informasi);
+        }
+
+        return view('frontend.informasi-detail', ['idInfo' => $request->id, 'informasi' => $informasi, 'latestInformasi' => $latestInformasi]);
     }
 }

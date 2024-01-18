@@ -28,5 +28,10 @@ class Informasi extends Model
     {
         return $this->hasMany(DokumenModel::class, 'id_informasi', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }
 

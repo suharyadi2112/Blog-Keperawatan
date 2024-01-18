@@ -33,7 +33,8 @@
                         <div class="news-content">
                             <div class="date">
                                 {{ \Carbon\Carbon::parse($informasi->created_at)->format('d M Y') }}</div>
-                            <h2><a href="{{ Route("informasiDetail", ['id' => $informasi->id] ) }}" target="_blank">{!! $informasi->judul_informasi !!}</a></h2>
+                            {{-- <h2><a href="{{ Route("informasiDetail", ['id' => $informasi->id] ) }}" target="_blank">{!! $informasi->judul_informasi !!}</a></h2> --}}
+                            <h2><a href="#" onclick="openInformasiDetail({{ $informasi->id }}); return false;">{!! $informasi->judul_informasi !!}</a></h2>
                             <p class="text">{!! substr(strip_tags($informasi->isi_informasi), 0, 200) !!}...</p>
                         </div>
                     </div>
@@ -61,5 +62,31 @@
         background-repeat: no-repeat;
     }
 </style>
+
+<script type="text/javascript">
+     function openInformasiDetail(id) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ Route('informasiDetail') }}'; 
+        form.target = '_blank';
+
+        var idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'id';
+        idInput.value = id;
+        form.appendChild(idInput);
+
+        // CSRF
+        var csrfTokenInput = document.createElement('input');
+        csrfTokenInput.type = 'hidden';
+        csrfTokenInput.name = '_token';
+        csrfTokenInput.value = '{{ csrf_token() }}';
+        form.appendChild(csrfTokenInput);
+
+        // Submit the form
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 
 @endsection
