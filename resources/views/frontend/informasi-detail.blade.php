@@ -119,7 +119,7 @@
             @foreach($info->dokumentasis as $dokumentasi)
                 <div class="single-pf">
                     <img src="{{ asset('storage/dokumentasi/' . $dokumentasi->foto_dokumentasi) }}" alt="#" style="width: 100%; height: 200px; object-fit: cover;">
-                    <a href="{{ Route("frontend.dokumentasi") }}" class="btn">View Details</a>
+                    <a href="{{ Route("frontend.dokumentasi") }}" class="btn">Dokumentasi</a>
                 </div>
             @endforeach
         @endforeach
