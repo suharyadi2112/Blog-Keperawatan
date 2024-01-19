@@ -206,7 +206,6 @@ class InformasiController extends Controller
     public function informasiShowUpdate($id){
         try {
             $data = Informasi::find($id);
-
             return view('admin.informasi.edit_informasi', ['informasi' => $data]);
         } catch (\Exception $e) {
             return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
@@ -215,10 +214,41 @@ class InformasiController extends Controller
 
     public function upDateInformasi(Request $request, $id){
 
-        $informasi = Informasi::find($id);
-        $informasi->update(['judul_informasi' => $request->judul_informasi, 'isi_informasi' => $request->isi_informasi]);
+        try {
 
-        return response()->json(['status' => 'success', 'message' => 'Informasi updated', 'data' => null], 200);
+            $request->validate([
+                'thumbnail' => 'required|image|mimes:jpeg,jpg,png|max:2024',
+                'judul_informasi' => 'required',
+                'isi_informasi' => 'required',
+            ],[
+                'thumbnail.required' => 'Foto thumbnail tidak boleh kosong',
+                'thumbnail.image' => 'Foto thumbnail harus berupa gambar',
+                'thumbnail.mimes' => 'Foto thumbnail harus berupa gambar dengan format jpeg,jpg, png',
+                'thumbnail.max' => 'Foto thumbnail maksimal berukuran 2 MB',
+                'judul_informasi.required' => 'Foto thumbnail tidak boleh kosong',
+                'isi_informasi.required' => 'Isi informasi tidak boleh kosong',
+            ]);
+
+            $informasi = Informasi::find($id);
+
+            if ($informasi->thumbnail != null || Storage::disk('public')->exists('thumbnail/' . $informasi->thumbnail)) {
+                Storage::disk('public')->delete('thumbnail/' . $informasi->thumbnail);
+            }
+
+            $thumbnail = $request->file('thumbnail');
+            $nama_foto = time() . "_" . $thumbnail->getClientOriginalName();
+            $thumbnail->storeAs('/thumbnail', $nama_foto, 'public');
+
+            $informasi->update(['judul_informasi' => $request->judul_informasi, 'isi_informasi' => $request->isi_informasi, 'thumbnail' =>  $nama_foto]);
+
+            
+            return response()->json(['status' => 'success', 'message' => 'Informasi updated', 'data' => null], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->errors(), 'data' => null], 400);
+        } catch (\Exception $e) {   
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
 
     }
 
@@ -252,11 +282,11 @@ class InformasiController extends Controller
                 if ($request->tipeFile == 'dokumentasi') {
 
                     $request->validate([
-                        'file_dok' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2024',
+                        'file_dok' => 'required|image|mimes:jpeg,jpg,png|max:2024',
                     ],[
                         'file_dok.required' => 'Foto dokumentasi tidak boleh kosong',
                         'file_dok.image' => 'Foto dokumentasi harus berupa gambar',
-                        'file_dok.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg,jpg, png,gif,svg',
+                        'file_dok.mimes' => 'Foto dokumentasi harus berupa gambar dengan format jpeg,jpg, png',
                         'file_dok.max' => 'Foto dokumentasi maksimal berukuran 2 MB',
                     ]);
 

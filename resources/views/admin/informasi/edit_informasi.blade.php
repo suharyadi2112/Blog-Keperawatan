@@ -17,11 +17,21 @@
                 <form method="POST" id="updateInformasi" data-route="{{ route('upDateInformasi',['id' => $informasi->id]) }}">
                     <div id="alertInfoSuccess"> </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputBorderWidth2">Judul Informasi</label>
                                 <input type="text" name="judul_informasi" value="{{ $informasi->judul_informasi }}" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Masukan judul informasi">
                             </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <div class="form-group">
+                                <label for="exampleInputBorderWidththumbnail">Thumbnail</label>
+                                <input type="file" name="thumbnail" id="thumbnail" class="form-control form-control-border border-width-2" id="exampleInputBorderWidththumbnail">
+                                <font color="blue">{{ $informasi->thumbnail }}</font><br>
+                                <code>jpeg,jpg,png</code>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputBorderWidth3">Isi Informasi</label>
                                 <textarea id="summernote" name="isi_informasi">
@@ -62,6 +72,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             beforeSend: function() {
+                $('.listError').remove();
                 $('.btnUpdateInformasi').prop('disabled', true);
             },
             success: function(data) {
@@ -73,9 +84,17 @@ $(document).ready(function() {
                 $('.btnUpdateInformasi').prop('disabled', false);
             },
             error: function(data,xhr) {
-                if (data.status && data.status == 400) {
-                    
+                
+                var errorMessage = '<div class="alert alert-danger alert-dismissible listError" style="padding-bottom: 0px;"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h5><i class="icon fas fa-ban"></i> Alert!</h5>';
+                if (data.responseJSON.message) {
+                    errorMessage += '<ul>';
+                    Object.keys(data.responseJSON.message).forEach(function (field) {
+                        errorMessage += '<li>' + field + ': ' + data.responseJSON.message[field].join(', ') + '</li>';
+                    });
+                    errorMessage += '</ul>';
                 }
+                errorMessage += '</div>';
+                $('#alertInfoSuccess').append(errorMessage);
                 console.log(data.responseJSON)
                 console.log(data)
             },
