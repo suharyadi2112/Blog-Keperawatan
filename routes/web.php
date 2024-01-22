@@ -50,6 +50,7 @@ Route::post('/dashboard/informasi/update/proses/{id}', [App\Http\Controllers\Inf
 Route::post('/dashboard/informasi/del/doktasi', [App\Http\Controllers\InformasiController::class, 'delFileDokumentasi'])->name('delFileDokumentasi');
 Route::post('/dashboard/informasi/up/doktasi', [App\Http\Controllers\InformasiController::class, 'upFileDok'])->name('upFileDok');
 Route::post('/dashboard/informasi/add/doktasi', [App\Http\Controllers\InformasiController::class, 'addFileDok'])->name('addFileDok');
+Route::post('/dashboard/informasi/add/publish', [App\Http\Controllers\InformasiController::class, 'publishInformasi'])->name('publishInformasi');
 
 
 

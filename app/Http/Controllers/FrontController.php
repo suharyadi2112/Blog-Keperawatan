@@ -16,7 +16,7 @@ class FrontController extends Controller
     public function indexfrontend()
     {
         $dokumens=DokumenModel::orderby('created_at','desc')->limit(5)->get();
-        $informasi=Informasi::with('dokumentasis')->orderby('created_at','desc')->limit(3)->get();
+        $informasi=Informasi::with('dokumentasis')->where('publish', '=', 'publish')->orderby('created_at','desc')->limit(3)->get();
         return view('frontend.index',)->with('dokumens',$dokumens)->with('informasi',$informasi);
     }
     public function indexDokumentasi(){
@@ -31,15 +31,15 @@ class FrontController extends Controller
 
     public function indexInformasi(){
 
-        $informasi=Informasi::with('dokumentasis', 'dokumen')->orderby('created_at','desc')->paginate(6);
+        $informasi=Informasi::with('dokumentasis', 'dokumen')->where('publish', '=', 'publish')->orderby('created_at','desc')->paginate(6);
 
         return view('frontend.informasi', ['informasi' => $informasi])->with('informasis',$informasi);
     }
 
     public function detailInformasi(Request $request){
 
-        $informasi=Informasi::with('dokumentasis', 'dokumen', 'user')->orderby('created_at','desc')->where('id','=',$request->id)->get();
-        $latestInformasi = Informasi::find($request->id)->orderBy('created_at', 'desc')->take(3)->get();
+        $informasi=Informasi::with('dokumentasis', 'dokumen', 'user')->where('publish', '=', 'publish')->orderby('created_at','desc')->where('id','=',$request->id)->get();
+        $latestInformasi = Informasi::find($request->id)->where('publish', '=', 'publish')->orderBy('created_at', 'desc')->take(3)->get();
 
         if ($request->ajax()) {
             return response()->json($informasi);

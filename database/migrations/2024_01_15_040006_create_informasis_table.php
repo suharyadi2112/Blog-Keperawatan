@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('judul_informasi');
             $table->longText('isi_informasi');
             $table->string('thumbnail')->nullable();
+            $table->string('publish')->default('draft');
             $table->softDeletes();
         });
     }

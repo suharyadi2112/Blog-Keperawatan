@@ -49,7 +49,7 @@
                             <!-- Single Blog -->
                             <div class="single-news">
                                 <div class="news-head">
-                                        <img src="{{ asset('storage/thumbnail/' . $informasi->thumbnail) }}" alt="#">
+                                        <img src="{{ asset('storage/thumbnail/' . $informasi->thumbnail) }}" alt="#" style="width: 100%; height: 200px; object-fit: cover;">
                                 </div>
                                 <div class="news-body">
                                     <div class="news-content">

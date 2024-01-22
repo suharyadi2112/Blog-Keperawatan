@@ -18,6 +18,7 @@ class Informasi extends Model
         'isi_informasi',
         'id_user',
         'thumbnail',
+        'publish',
     ];
 
     public function dokumentasis()
