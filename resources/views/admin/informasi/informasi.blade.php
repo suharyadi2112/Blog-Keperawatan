@@ -163,13 +163,14 @@
                     <label for="customRadio1" class="custom-control-label">Dokumen</label>
                 </div>
                 
-                <code>jpeg,jpg,png,gif,svg</code>
+                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
+                
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" id="customRadio2" value="dokumentasi" name="tipeFIless">
                     <label for="customRadio2" class="custom-control-label">Dokumentasi</label>
                 </div>
                 
-                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
+                <code>jpeg,jpg,png,gif,svg</code>
             </div>
             <div class="form-group col-6">
                 <input type="hidden" name="idInformasi" id="idInformasi">
