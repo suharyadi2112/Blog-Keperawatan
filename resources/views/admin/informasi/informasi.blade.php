@@ -32,6 +32,7 @@
                             <th>Thumbnail</th>
                             <th>Dokumentasi</th>
                             <th>Dokumen</th>
+                            <th>Publish</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -163,13 +164,14 @@
                     <label for="customRadio1" class="custom-control-label">Dokumen</label>
                 </div>
                 
-                <code>jpeg,jpg,png,gif,svg</code>
+                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
+                
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" type="radio" id="customRadio2" value="dokumentasi" name="tipeFIless">
                     <label for="customRadio2" class="custom-control-label">Dokumentasi</label>
                 </div>
                 
-                <code>doc, docx, xls, xlsx, ppt, pptx, txt, pdf, csv</code>
+                <code>jpeg,jpg,png,gif,svg</code>
             </div>
             <div class="form-group col-6">
                 <input type="hidden" name="idInformasi" id="idInformasi">
@@ -251,6 +253,12 @@
                         return dokumen;
                     }
                 },
+                {data: 'publish', name: 'publish',
+                    render: function(type, row, data){
+                        var statusPublish = data.publish === 'publish' ? 'checked' : ''
+	            		return '<div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" ><input type="checkbox" value='+data.id+' name="status_publish" id="StatusPublish'+data.id+'" class="custom-control-input StatusPublish" '+statusPublish+'><label class="custom-control-label" for="StatusPublish'+data.id+'">'+data.publish+'</label></div>';
+                    }
+                },
             ],
             createdRow:function(row,data,index){
 		    	$('td',row).eq(0).css("vertical-align","middle");
@@ -259,14 +267,17 @@
 		    	$('td',row).eq(3).css("vertical-align","middle");
 		    	$('td',row).eq(4).css("vertical-align","middle");
 		    	$('td',row).eq(5).css("vertical-align","middle");
+		    	$('td',row).eq(6).css("vertical-align","middle");
 
                 
 		    	$('td',row).eq(0).attr("nowrap","nowrap");
 		    	$('td',row).eq(4).attr("nowrap","nowrap");
 		    	$('td',row).eq(5).attr("nowrap","nowrap");
+		    	$('td',row).eq(6).attr("nowrap","nowrap");
 		    	$('td',row).eq(1).css("text-align","left");
 		    	$('td',row).eq(2).css("text-align","center");
-		    	$('td',row).eq(3).css("text-align","center");			}
+		    	$('td',row).eq(3).css("text-align","center");			
+            }
         });
 
         //del file spesific
@@ -383,6 +394,38 @@
             }
         });
 
+
+        //status publish 
+        $(document).on("click", ".StatusPublish", function () {
+            var IdInfor = $(this).val();
+            $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}});
+
+            $.ajax({
+		        type: 'POST',
+		        url: '{{ Route('publishInformasi') }}',
+		        data: {'idInfor' : IdInfor},
+                dataType: 'json',
+		        beforeSend: function() {
+                    $('#StatusPublish').prop('disabled', true);
+		        },
+		        success: function(data) {
+                    alert("status publish berubah");
+			    },
+		        complete: function() {
+                    tableInformasi.ajax.reload();
+                    $('#StatusPublish').prop('disabled', false);
+		        },
+		        error: function(data,xhr) {
+                    if (data.status && data.status == 400) {
+                        alert("Terjadi kesalahan")
+                    }
+                    console.log(data.responseJSON)
+                    console.log(data)
+		        },
+		    });
+
+        });
+        
 
 
         //update file spesific

@@ -48,8 +48,6 @@
                         <p id="isiInformasi"></p>
                     </div>
 
-                    
-                   
                     </div> 
                 </div>
             </div>
@@ -64,11 +62,12 @@
                         <div class="image">
                             @foreach($informasi as $infoThumnail)
                             <img src="{{ asset('storage/thumbnail/' . $infoThumnail->thumbnail) }}" alt="#" style="object-fit: cover;">
+                            </a>
                             @endforeach
                         </div>
                         <div class="content">
                         <h5>
-                            <a href="#">{{ $infolast->judul_informasi }}</a>
+                            <a href="#" onclick="openInformasiDetail({{ $infolast->id }}); return false;">{{ $infolast->judul_informasi }}</a>
                         </h5>
                         <ul class="comment">
                             <li>
@@ -183,7 +182,30 @@
         var tanggalAkhir = tanggalObjek.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
         return tanggalAkhir;
     }
-    
+    function openInformasiDetail(id) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ Route('informasiDetail') }}';
+        form.target = '_blank';
+
+        var idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'id';
+        idInput.value = id;
+        form.appendChild(idInput);
+
+        // CSRF
+        var csrfTokenInput = document.createElement('input');
+        csrfTokenInput.type = 'hidden';
+        csrfTokenInput.name = '_token';
+        csrfTokenInput.value = '{{ csrf_token() }}';
+        form.appendChild(csrfTokenInput);
+
+        // Submit the form
+        document.body.appendChild(form);
+        form.submit();
+    }
+
 </script>
 
 @endsection

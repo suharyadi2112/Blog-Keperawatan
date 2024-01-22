@@ -423,6 +423,26 @@ class InformasiController extends Controller
         
     }
 
+    public function publishInformasi(Request $request){
+        try {
+            DB::transaction(function () use ($request) {
+                $data = Informasi::find($request->idInfor);
+
+                if ($data) {
+                    $newPublishStatus = $data->publish === 'draft' ? 'publish' : 'draft';
+                    $data->update(['publish' => $newPublishStatus]);
+                } else {
+                    throw new \Exception('Data not found.');
+                }
+            });
+            return response()->json(['status' => 'success', 'message' => 'succes update status publish', 'data' => null], 200);
+        } catch (ValidationException $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->errors(), 'data' => null], 400);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'fail', 'message' => $e->getMessage(), 'data' => null], 500);
+        }
+    }
+
     private function validateInformasi(Request $request, $action = 'insert')
     {
         if($action == 'insert'){
