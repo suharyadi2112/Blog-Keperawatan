@@ -43,7 +43,7 @@
                     <div class="col-lg-6 col-md-4 col-12">
                         <!-- Start Logo -->
                         <div class="logo mb-3">
-                            <a href="{{ route('welcome') }}"><img src="assets/img/rsud.jpg" width="160" height="50" alt="logo"></a>
+                            <a href="{{ route('welcome') }}"><img src="assets/img/logo-text.png" width="120" height="70" alt="logo"></a>
                         </div>
                         <!-- End Logo -->
                         <!-- Mobile Nav -->
